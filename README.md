@@ -17,9 +17,16 @@ Este proyecto es ideal para mejorar la productividad y el seguimiento de activid
 
 # Tecnologías Utilizadas
 
-- Lenguaje de programación: Java 17+
+- Lenguaje de programación: Java 
 - Estructuras de datos: Uso de listas dinámicas con la clase ArrayList para gestionar las tareas.
 - Entrada y salida de datos: Se emplea Scanner para la interacción con el usuario en consola.
-- Persistencia de datos (opcional): Se podría implementar el almacenamiento en archivos JSON o TXT para conservar las tareas entre ejecuciones.
--Interfaz gráfica (opcional): Posibilidad de desarrollar una versión con JavaFX para mejorar la experiencia de usuario.
 
+# Estructura del Proyecto
+
+El proyecto está organizado en distintas carpetas para una mejor estructuración y mantenibilidad del código:
+
+- src/model: Contiene las clases que representan los datos principales del proyecto, como la clase Tarea.
+- src/controller: Abarca la lógica de negocio y las operaciones sobre las tareas, como agregar, eliminar o editar.
+- src/view: Se encarga de la interfaz con el usuario, ya sea por consola o mediante una futura interfaz gráfica con JavaFX.
+- src/Main.java: Archivo principal donde se ejecuta la aplicación y se inicializa el sistema.
+- README.md: Documento explicativo del proyecto y su funcionamiento.
