@@ -1,3 +1,5 @@
+package src;
+
 public class Tarea {
     private int id;
     private String titulo;
@@ -35,9 +37,15 @@ public class Tarea {
     public boolean isCompletada() {
         return completada;
     }
-    
+
     // Metodo para marcar la tarea como completada
     public void marcarComoCompletada() {
         this.completada = true;
+    }
+
+    // Sobrescribir toString() para mostrar la tarea en texto
+    @Override
+    public String toString() {
+        return "src.Tarea[ID=" + id + ", Titulo='" + titulo + "', Descripcion='" + descripcion + "', Completada=" + (completada ? "Sí" : "No") + "]";
     }
 }
