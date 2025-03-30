@@ -14,4 +14,9 @@ public class GestorTareas {
     public void agregarTarea(Tarea tarea) {
         tareas.add(tarea);
     }
+
+    // Metodo para eliminar una tarea por ID
+    public void eliminarTarea(int id) {
+        tareas.removeIf(tarea -> tarea.getId() == id);
+    }
 }
