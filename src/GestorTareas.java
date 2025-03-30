@@ -19,6 +19,7 @@ public class GestorTareas {
     public void eliminarTarea(int id) {
         tareas.removeIf(tarea -> tarea.getId() == id);
     }
+
     // Metodo para editar una tarea existente
     public void editarTarea(int id, String nuevoTitulo, String nuevaDescripcion) {
         for (Tarea tarea : tareas) {
@@ -26,6 +27,17 @@ public class GestorTareas {
                 tarea.setTitulo(nuevoTitulo);
                 tarea.setDescripcion(nuevaDescripcion);
                 break;
+            }
+        }
+    }
+
+    // Metodo para listar todas las tareas
+    public void listarTareas() {
+        if (tareas.isEmpty()) {
+            System.out.println("No hay tareas disponibles.");
+        } else {
+            for (Tarea tarea : tareas) {
+                System.out.println(tarea);
             }
         }
     }
