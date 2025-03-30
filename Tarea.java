@@ -35,4 +35,9 @@ public class Tarea {
     public boolean isCompletada() {
         return completada;
     }
+    
+    // Metodo para marcar la tarea como completada
+    public void marcarComoCompletada() {
+        this.completada = true;
+    }
 }
