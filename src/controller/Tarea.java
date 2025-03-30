@@ -1,4 +1,4 @@
-package src;
+package src.controller;
 
 public class Tarea {
     private int id;
@@ -46,6 +46,6 @@ public class Tarea {
     // Sobrescribir toString() para mostrar la tarea en texto
     @Override
     public String toString() {
-        return "src.Tarea[ID=" + id + ", Titulo='" + titulo + "', Descripcion='" + descripcion + "', Completada=" + (completada ? "Sí" : "No") + "]";
+        return "src.controller.Tarea[ID=" + id + ", Titulo='" + titulo + "', Descripcion='" + descripcion + "', Completada=" + (completada ? "Sí" : "No") + "]";
     }
 }
