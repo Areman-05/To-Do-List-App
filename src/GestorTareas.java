@@ -9,4 +9,9 @@ public class GestorTareas {
     public GestorTareas() {
         this.tareas = new ArrayList<>();
     }
+
+    // Metodo para agregar una tarea
+    public void agregarTarea(Tarea tarea) {
+        tareas.add(tarea);
+    }
 }
