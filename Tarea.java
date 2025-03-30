@@ -11,4 +11,18 @@ public class Tarea {
         this.descripcion = descripcion;
         this.completada = false;
     }
+
+    // Getters y Setters
+    public int getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
 }
