@@ -19,4 +19,14 @@ public class GestorTareas {
     public void eliminarTarea(int id) {
         tareas.removeIf(tarea -> tarea.getId() == id);
     }
+    // Metodo para editar una tarea existente
+    public void editarTarea(int id, String nuevoTitulo, String nuevaDescripcion) {
+        for (Tarea tarea : tareas) {
+            if (tarea.getId() == id) {
+                tarea.setTitulo(nuevoTitulo);
+                tarea.setDescripcion(nuevaDescripcion);
+                break;
+            }
+        }
+    }
 }
