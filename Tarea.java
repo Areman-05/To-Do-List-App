@@ -24,5 +24,15 @@ public class Tarea {
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+    public String getDescripcion() {
+        return descripcion;
+    }
 
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public boolean isCompletada() {
+        return completada;
+    }
 }
