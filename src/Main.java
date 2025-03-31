@@ -1,6 +1,7 @@
 package src;
 import java.util.Scanner;
 import src.controller.GestorTareas;
+import src.controller.Tarea;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,7 +23,17 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    System.out.println("Opción para agregar tarea seleccionada.");
+                    System.out.print("Ingrese ID de la tarea: ");
+                    int id = scanner.nextInt();
+                    scanner.nextLine(); // Limpiar buffer
+                    System.out.print("Ingrese título de la tarea: ");
+                    String titulo = scanner.nextLine();
+                    System.out.print("Ingrese descripción de la tarea: ");
+                    String descripcion = scanner.nextLine();
+
+                    Tarea nuevaTarea = new Tarea(id, titulo, descripcion);
+                    gestor.agregarTarea(nuevaTarea);
+                    System.out.println("Tarea agregada con éxito.");
                     break;
                 case 2:
                     System.out.println("Opción para eliminar tarea seleccionada.");
