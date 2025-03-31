@@ -19,5 +19,16 @@ public class Main {
 
             opcion = scanner.nextInt();
             scanner.nextLine(); // Limpiar buffer
+
+            switch (opcion) {
+                case 1:
+                    System.out.println("Opción para agregar tarea seleccionada.");
+                    break;
+                case 2:
+                    System.out.println("Opción para eliminar tarea seleccionada.");
+                    break;
+                case 3:
+                    System.out.println("Opción para editar tarea seleccionada.");
+                    break;
     }
 }
