@@ -42,7 +42,16 @@ public class Main {
                     System.out.println("Tarea eliminada con éxito.");
                     break;
                 case 3:
-                    System.out.println("Opción para editar tarea seleccionada.");
+                    System.out.print("Ingrese el ID de la tarea a editar: ");
+                    int idEditar = scanner.nextInt();
+                    scanner.nextLine(); // Limpiar buffer
+                    System.out.print("Ingrese el nuevo título de la tarea: ");
+                    String nuevoTitulo = scanner.nextLine();
+                    System.out.print("Ingrese la nueva descripción de la tarea: ");
+                    String nuevaDescripcion = scanner.nextLine();
+
+                    gestor.editarTarea(idEditar, nuevoTitulo, nuevaDescripcion);
+                    System.out.println("Tarea editada con éxito.");
                     break;
                 case 4:
                     System.out.println("Opción para listar tareas seleccionada.");
