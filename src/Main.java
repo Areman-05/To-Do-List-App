@@ -36,7 +36,10 @@ public class Main {
                     System.out.println("Tarea agregada con éxito.");
                     break;
                 case 2:
-                    System.out.println("Opción para eliminar tarea seleccionada.");
+                    System.out.print("Ingrese el ID de la tarea a eliminar: ");
+                    int idEliminar = scanner.nextInt();
+                    gestor.eliminarTarea(idEliminar);
+                    System.out.println("Tarea eliminada con éxito.");
                     break;
                 case 3:
                     System.out.println("Opción para editar tarea seleccionada.");
