@@ -38,6 +38,10 @@ public class Tarea {
         return completada;
     }
 
+    public void setCompletada(boolean completada) {
+        this.completada = completada;
+    }
+    
     // Metodo para marcar la tarea como completada
     public void marcarComoCompletada() {
         this.completada = true;
