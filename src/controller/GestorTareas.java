@@ -29,6 +29,7 @@ public class GestorTareas {
             if (tarea.getId() == id) {
                 tarea.setTitulo(nuevoTitulo);
                 tarea.setDescripcion(nuevaDescripcion);
+                GestorPersistencia.guardarTareas(tareas);
                 break;
             }
         }
