@@ -1,6 +1,6 @@
 package src.controller;
 
-import java.util.ArrayList;
+import src.persistence.GestorPersistencia;
 import java.util.List;
 
 public class GestorTareas {
@@ -8,9 +8,9 @@ public class GestorTareas {
 
     // Constructor
     public GestorTareas() {
-        this.tareas = new ArrayList<>();
+        this.tareas = GestorPersistencia.cargarTareas();
     }
-
+    
     // Metodo para agregar una tarea
     public void agregarTarea(Tarea tarea) {
         tareas.add(tarea);
