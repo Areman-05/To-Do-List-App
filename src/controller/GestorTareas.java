@@ -51,7 +51,7 @@ public class GestorTareas {
         for (Tarea tarea : tareas) {
             if (tarea.getId() == id) {
                 tarea.setCompletada(true);
-                System.out.println("Tarea " + id + " marcada como completada.");
+                GestorPersistencia.guardarTareas(tareas);
                 break;
             }
         }
