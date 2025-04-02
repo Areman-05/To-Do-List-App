@@ -42,4 +42,15 @@ public class GestorTareas {
             }
         }
     }
+
+    // Metodo para marcar una tarea como completada
+    public void marcarTareaComoCompletada(int id) {
+        for (Tarea tarea : tareas) {
+            if (tarea.getId() == id) {
+                tarea.setCompletada(true);
+                System.out.println("Tarea " + id + " marcada como completada.");
+                break;
+            }
+        }
+    }
 }
