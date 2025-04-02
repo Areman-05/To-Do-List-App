@@ -37,4 +37,9 @@ public class GestorPersistencia {
                     tareas.add(tarea);
                 }
             }
+        } catch (IOException e) {
+            System.out.println("Error al cargar las tareas: " + e.getMessage());
+        }
+        return tareas;
+    }
 }
