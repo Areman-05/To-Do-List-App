@@ -27,4 +27,14 @@ public class GestorPersistencia {
             String linea;
             while ((linea = reader.readLine()) != null) {
                 String[] partes = linea.split(",");
+                if (partes.length == 4) {
+                    int id = Integer.parseInt(partes[0]);
+                    String titulo = partes[1];
+                    String descripcion = partes[2];
+                    boolean completada = Boolean.parseBoolean(partes[3]);
+                    Tarea tarea = new Tarea(id, titulo, descripcion);
+                    tarea.setCompletada(completada);
+                    tareas.add(tarea);
+                }
+            }
 }
