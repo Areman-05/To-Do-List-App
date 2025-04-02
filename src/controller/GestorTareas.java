@@ -10,15 +10,17 @@ public class GestorTareas {
     public GestorTareas() {
         this.tareas = GestorPersistencia.cargarTareas();
     }
-    
+
     // Metodo para agregar una tarea
     public void agregarTarea(Tarea tarea) {
         tareas.add(tarea);
+        GestorPersistencia.guardarTareas(tareas);
     }
 
     // Metodo para eliminar una tarea por ID
     public void eliminarTarea(int id) {
         tareas.removeIf(tarea -> tarea.getId() == id);
+        GestorPersistencia.guardarTareas(tareas);
     }
 
     // Metodo para editar una tarea existente
