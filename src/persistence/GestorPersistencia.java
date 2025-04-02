@@ -19,4 +19,12 @@ public class GestorPersistencia {
             System.out.println("Error al guardar las tareas: " + e.getMessage());
         }
     }
+
+    // Método para cargar las tareas desde un archivo
+    public static List<Tarea> cargarTareas() {
+        List<Tarea> tareas = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(ARCHIVO_TAREAS))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] partes = linea.split(",");
 }
