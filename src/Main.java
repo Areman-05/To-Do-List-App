@@ -54,8 +54,9 @@ public class Main {
                     System.out.println("Tarea editada con éxito.");
                     break;
                 case 4:
-                    System.out.println("Listado de tareas:");
+                    System.out.println("\n=== LISTA DE TAREAS ===");
                     gestor.listarTareas();
+                    System.out.println("=======================\n");
                     break;
                 case 5:
                     System.out.println("Saliendo del programa...");
