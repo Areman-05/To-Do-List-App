@@ -74,3 +74,9 @@ public class InterfazConsola {
         int id = Integer.parseInt(scanner.nextLine());
         gestor.eliminarTarea(id);
     }
+    private static void marcarComoCompletada() {
+        System.out.print("Ingrese ID de la tarea a marcar como completada: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        gestor.marcarTareaComoCompletada(id);
+    }
+}
