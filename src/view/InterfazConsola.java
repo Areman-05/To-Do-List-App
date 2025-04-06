@@ -23,3 +23,28 @@ public class InterfazConsola {
             System.out.print("Seleccione una opción: ");
 
             int opcion = Integer.parseInt(scanner.nextLine());
+            switch (opcion) {
+                case 1:
+                    gestor.listarTareas();
+                    break;
+                case 2:
+                    agregarTarea();
+                    break;
+                case 3:
+                    editarTarea();
+                    break;
+                case 4:
+                    eliminarTarea();
+                    break;
+                case 5:
+                    marcarComoCompletada();
+                    break;
+                case 6:
+                    salir = true;
+                    System.out.println("Saliendo...");
+                    break;
+                default:
+                    System.out.println("Opción no válida.");
+            }
+        }
+    }
