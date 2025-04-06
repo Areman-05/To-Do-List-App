@@ -48,3 +48,14 @@ public class InterfazConsola {
             }
         }
     }
+    private static void agregarTarea() {
+        System.out.print("Ingrese ID de la tarea: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        System.out.print("Ingrese título: ");
+        String titulo = scanner.nextLine();
+        System.out.print("Ingrese descripción: ");
+        String descripcion = scanner.nextLine();
+
+        Tarea tarea = new Tarea(id, titulo, descripcion);
+        gestor.agregarTarea(tarea);
+    }
