@@ -69,3 +69,8 @@ public class InterfazConsola {
 
         gestor.editarTarea(id, nuevoTitulo, nuevaDescripcion);
     }
+    private static void eliminarTarea() {
+        System.out.print("Ingrese ID de la tarea a eliminar: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        gestor.eliminarTarea(id);
+    }
