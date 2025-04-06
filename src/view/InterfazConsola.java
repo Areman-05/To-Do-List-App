@@ -59,3 +59,13 @@ public class InterfazConsola {
         Tarea tarea = new Tarea(id, titulo, descripcion);
         gestor.agregarTarea(tarea);
     }
+    private static void editarTarea() {
+        System.out.print("Ingrese ID de la tarea a editar: ");
+        int id = Integer.parseInt(scanner.nextLine());
+        System.out.print("Nuevo título: ");
+        String nuevoTitulo = scanner.nextLine();
+        System.out.print("Nueva descripción: ");
+        String nuevaDescripcion = scanner.nextLine();
+
+        gestor.editarTarea(id, nuevoTitulo, nuevaDescripcion);
+    }
