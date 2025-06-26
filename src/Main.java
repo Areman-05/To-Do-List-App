@@ -68,17 +68,15 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    System.out.print("Ingrese ID de la tarea: ");
-                    int id = scanner.nextInt();
-                    scanner.nextLine(); // Limpiar buffer
                     System.out.print("Ingrese título de la tarea: ");
                     String titulo = scanner.nextLine();
-                    System.out.print("Ingrese descripción de la tarea: ");
+                    System.out.print("Ingrese descripción de la tarea (opcional): ");
                     String descripcion = scanner.nextLine();
 
-                    Tarea nuevaTarea = new Tarea(id, titulo, descripcion);
+                    int nuevoId = gestor.generarNuevoId();
+                    Tarea nuevaTarea = new Tarea(nuevoId, titulo, descripcion);
                     gestor.agregarTarea(nuevaTarea);
-                    System.out.println("Tarea agregada con éxito.");
+                    System.out.println("Tarea agregada con ID " + nuevoId + ".");
                     break;
                 case 2:
                     System.out.print("Ingrese el ID de la tarea a eliminar: ");
