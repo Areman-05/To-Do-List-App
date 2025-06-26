@@ -79,10 +79,36 @@ public class Main {
                     System.out.println("Tarea agregada con ID " + nuevoId + ".");
                     break;
                 case 2:
-                    System.out.print("Ingrese el ID de la tarea a eliminar: ");
-                    int idEliminar = scanner.nextInt();
-                    gestor.eliminarTarea(idEliminar);
-                    System.out.println("Tarea eliminada con éxito.");
+                    int opcionEliminar;
+                    do {
+                        System.out.println("\n--- ELIMINAR TAREA ---");
+                        System.out.println("1. Eliminar por ID");
+                        System.out.println("2. Eliminar por titulo de tarea");
+                        System.out.println("3. Volver al menú principal");
+                        System.out.print("Seleccione una opción: ");
+
+                        opcionEliminar = scanner.nextInt();
+                        scanner.nextLine();
+
+                        if (opcionEliminar == 1) {
+                            System.out.print("Ingrese el ID de la tarea a eliminar: ");
+                            int idEliminar = scanner.nextInt();
+                            scanner.nextLine();
+                            gestor.eliminarTarea(idEliminar);
+                            System.out.println("Tarea eliminada con éxito.");
+                        } else if (opcionEliminar == 2) {
+                            System.out.print("Ingrese el título de la tarea a eliminar: ");
+                            String tituloEliminar = scanner.nextLine();
+                            boolean eliminada = gestor.eliminarTareaPorTitulo(tituloEliminar);
+                            if (eliminada) {
+                                System.out.println("Tarea eliminada con éxito.");
+                            } else {
+                                System.out.println("No se encontró esa tarea.");
+                            }
+                        } else if (opcionEliminar != 3) {
+                            System.out.println("Opción no válida.");
+                        }
+                    } while (opcionEliminar != 3);
                     break;
                 case 3:
                     System.out.print("Ingrese el ID de la tarea a editar: ");
