@@ -2,6 +2,7 @@ package src.controller;
 
 import src.persistence.GestorPersistencia;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class GestorTareas {
@@ -22,6 +23,20 @@ public class GestorTareas {
     public void eliminarTarea(int id) {
         tareas.removeIf(tarea -> tarea.getId() == id);
         GestorPersistencia.guardarTareas(tareas);
+    }
+
+    // Metodo para eliminar una tarea por titulo
+    public boolean eliminarTareaPorTitulo(String titulo) {
+        Iterator<Tarea> iterator = tareas.iterator();
+        while (iterator.hasNext()) {
+            Tarea tarea = iterator.next();
+            if (tarea.getTitulo().equalsIgnoreCase(titulo)) {
+                iterator.remove();
+                GestorPersistencia.guardarTareas(tareas);
+                return true;
+            }
+        }
+        return false;
     }
 
     // Metodo para editar una tarea existente
