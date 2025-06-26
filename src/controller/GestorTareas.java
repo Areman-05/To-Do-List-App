@@ -1,6 +1,7 @@
 package src.controller;
 
 import src.persistence.GestorPersistencia;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GestorTareas {
@@ -35,6 +36,17 @@ public class GestorTareas {
         }
     }
 
+    // Metodo para marcar una tarea como completada
+    public void marcarTareaComoCompletada(int id) {
+        for (Tarea tarea : tareas) {
+            if (tarea.getId() == id) {
+                tarea.setCompletada(true);
+                GestorPersistencia.guardarTareas(tareas);
+                break;
+            }
+        }
+    }
+
     // Metodo para listar todas las tareas
     public void listarTareas() {
         if (tareas.isEmpty()) {
@@ -46,14 +58,14 @@ public class GestorTareas {
         }
     }
 
-    // Metodo para marcar una tarea como completada
-    public void marcarTareaComoCompletada(int id) {
+    // Metodo para generar un nuevo ID único automáticamente
+    public int generarNuevoId() {
+        int maxId = 0;
         for (Tarea tarea : tareas) {
-            if (tarea.getId() == id) {
-                tarea.setCompletada(true);
-                GestorPersistencia.guardarTareas(tareas);
-                break;
+            if (tarea.getId() > maxId) {
+                maxId = tarea.getId();
             }
         }
+        return maxId + 1;
     }
 }
