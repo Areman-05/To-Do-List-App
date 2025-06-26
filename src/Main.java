@@ -2,11 +2,54 @@ package src;
 
 import java.util.Scanner;
 import src.controller.GestorTareas;
+import src.controller.GestorEmpleados;
 import src.controller.Tarea;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        GestorEmpleados gestorEmpleados = new GestorEmpleados();
+        int idEmpleado = -1;
+
+        while (true) {
+            System.out.println("\n--- BIENVENIDO ---");
+            System.out.println("1. Iniciar sesión como empleado");
+            System.out.println("2. Registrarse como nuevo empleado");
+            System.out.println("3. Salir");
+            System.out.print("Seleccione una opción: ");
+
+            int opcionLogin = scanner.nextInt();
+            scanner.nextLine(); // limpiar buffer
+
+            if (opcionLogin == 1) {
+                System.out.print("Ingrese su ID de empleado: ");
+                idEmpleado = scanner.nextInt();
+                scanner.nextLine();
+                if (gestorEmpleados.verificarEmpleado(idEmpleado)) {
+                    System.out.println("Acceso concedido. Bienvenido, empleado " + idEmpleado);
+                    break;
+                } else {
+                    System.out.println("ID no registrado. Intente nuevamente.");
+                }
+            } else if (opcionLogin == 2) {
+                System.out.print("Ingrese un nuevo ID para registrarse: ");
+                int nuevoId = scanner.nextInt();
+                scanner.nextLine();
+                if (gestorEmpleados.registrarEmpleado(nuevoId)) {
+                    System.out.println("Empleado registrado exitosamente. Ahora puede iniciar sesión.");
+                } else {
+                    System.out.println("Ese ID ya está registrado. Intente con otro.");
+                }
+            } else if (opcionLogin == 3) {
+                System.out.println("Saliendo del programa...");
+                scanner.close();
+                return;
+            } else {
+                System.out.println("Opción no válida.");
+            }
+        }
+
+        // Acceso concedido, se entra al gestor de tareas
         GestorTareas gestor = new GestorTareas();
         int opcion;
 
