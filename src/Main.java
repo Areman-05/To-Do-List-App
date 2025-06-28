@@ -111,16 +111,81 @@ public class Main {
                     } while (opcionEliminar != 3);
                     break;
                 case 3:
-                    System.out.print("Ingrese el ID de la tarea a editar: ");
-                    int idEditar = scanner.nextInt();
-                    scanner.nextLine(); // Limpiar buffer
-                    System.out.print("Ingrese el nuevo título de la tarea: ");
-                    String nuevoTitulo = scanner.nextLine();
-                    System.out.print("Ingrese la nueva descripción de la tarea: ");
-                    String nuevaDescripcion = scanner.nextLine();
+                    int subOpcionEditar;
+                    do {
+                        System.out.println("\n--- EDITAR TAREA ---");
+                        System.out.println("1. Cambiar título");
+                        System.out.println("2. Cambiar descripción");
+                        System.out.println("3. Marcar como completada");
+                        System.out.println("4. Volver al menú principal");
+                        System.out.print("Seleccione una opción: ");
+                        subOpcionEditar = scanner.nextInt();
+                        scanner.nextLine();
 
-                    gestor.editarTarea(idEditar, nuevoTitulo, nuevaDescripcion);
-                    System.out.println("Tarea editada con éxito.");
+                        if (subOpcionEditar == 1) {
+                            int metodo;
+                            do {
+                                System.out.println("\nEditar título por:");
+                                System.out.println("1. ID");
+                                System.out.println("2. Nombre de tarea");
+                                System.out.println("3. Volver atrás");
+                                metodo = scanner.nextInt();
+                                scanner.nextLine();
+
+                                if (metodo == 1) {
+                                    System.out.print("Ingrese ID de la tarea: ");
+                                    int id = scanner.nextInt();
+                                    scanner.nextLine();
+                                    System.out.print("Nuevo título: ");
+                                    String nuevoTitulo = scanner.nextLine();
+                                    gestor.editarTarea(id, nuevoTitulo, null);
+                                    System.out.println("Título actualizado.");
+                                } else if (metodo == 2) {
+                                    System.out.print("Ingrese nombre actual de la tarea: ");
+                                    String nombre = scanner.nextLine();
+                                    System.out.print("Nuevo título: ");
+                                    String nuevoTitulo = scanner.nextLine();
+                                    gestor.editarTituloPorNombre(nombre, nuevoTitulo);
+                                    System.out.println("Título actualizado.");
+                                }
+                            } while (metodo != 3);
+
+                        } else if (subOpcionEditar == 2) {
+                            int metodo;
+                            do {
+                                System.out.println("\nEditar descripción por:");
+                                System.out.println("1. ID");
+                                System.out.println("2. Nombre de tarea");
+                                System.out.println("3. Volver atrás");
+                                metodo = scanner.nextInt();
+                                scanner.nextLine();
+
+                                if (metodo == 1) {
+                                    System.out.print("Ingrese ID de la tarea: ");
+                                    int id = scanner.nextInt();
+                                    scanner.nextLine();
+                                    System.out.print("Nueva descripción: ");
+                                    String nuevaDesc = scanner.nextLine();
+                                    gestor.editarTarea(id, null, nuevaDesc);
+                                    System.out.println("Descripción actualizada.");
+                                } else if (metodo == 2) {
+                                    System.out.print("Ingrese nombre actual de la tarea: ");
+                                    String nombre = scanner.nextLine();
+                                    System.out.print("Nueva descripción: ");
+                                    String nuevaDesc = scanner.nextLine();
+                                    gestor.editarDescripcionPorNombre(nombre, nuevaDesc);
+                                    System.out.println("Descripción actualizada.");
+                                }
+                            } while (metodo != 3);
+
+                        } else if (subOpcionEditar == 3) {
+                            System.out.print("Ingrese ID de la tarea a marcar como completada: ");
+                            int idCompletar = scanner.nextInt();
+                            scanner.nextLine();
+                            gestor.marcarTareaComoCompletada(idCompletar);
+                            System.out.println("Tarea marcada como completada.");
+                        }
+                    } while (subOpcionEditar != 4);
                     break;
                 case 4:
                     System.out.println("\n=== LISTA DE TAREAS ===");
