@@ -39,12 +39,40 @@ public class GestorTareas {
         return false;
     }
 
-    // Metodo para editar una tarea existente
+    // Metodo para editar título por nombre
+    public boolean editarTituloPorNombre(String nombreActual, String nuevoTitulo) {
+        for (Tarea tarea : tareas) {
+            if (tarea.getTitulo().equalsIgnoreCase(nombreActual)) {
+                tarea.setTitulo(nuevoTitulo);
+                GestorPersistencia.guardarTareas(tareas);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Metodo para editar descripción por nombre
+    public boolean editarDescripcionPorNombre(String nombreActual, String nuevaDescripcion) {
+        for (Tarea tarea : tareas) {
+            if (tarea.getTitulo().equalsIgnoreCase(nombreActual)) {
+                tarea.setDescripcion(nuevaDescripcion);
+                GestorPersistencia.guardarTareas(tareas);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Metodo para editar una tarea existente por ID
     public void editarTarea(int id, String nuevoTitulo, String nuevaDescripcion) {
         for (Tarea tarea : tareas) {
             if (tarea.getId() == id) {
-                tarea.setTitulo(nuevoTitulo);
-                tarea.setDescripcion(nuevaDescripcion);
+                if (nuevoTitulo != null) {
+                    tarea.setTitulo(nuevoTitulo);
+                }
+                if (nuevaDescripcion != null) {
+                    tarea.setDescripcion(nuevaDescripcion);
+                }
                 GestorPersistencia.guardarTareas(tareas);
                 break;
             }
