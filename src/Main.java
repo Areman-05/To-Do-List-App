@@ -59,8 +59,7 @@ public class Main {
             System.out.println("2. Eliminar tarea");
             System.out.println("3. Editar tarea");
             System.out.println("4. Listar tareas");
-            System.out.println("5. Marcar tarea como completada");
-            System.out.println("6. Salir");
+            System.out.println("5. Salir");
             System.out.print("Seleccione una opción: ");
 
             opcion = scanner.nextInt();
@@ -192,19 +191,14 @@ public class Main {
                     gestor.listarTareas();
                     System.out.println("=======================\n");
                     break;
+
                 case 5:
-                    System.out.print("Ingrese el ID de la tarea a marcar como completada: ");
-                    int idCompletar = scanner.nextInt();
-                    gestor.marcarTareaComoCompletada(idCompletar);
-                    System.out.println("Tarea marcada como completada.");
-                    break;
-                case 6:
                     System.out.println("Saliendo del programa...");
                     break;
                 default:
                     System.out.println("Opción no válida, intente de nuevo.");
             }
-        } while (opcion != 6);
+        } while (opcion != 5);
         scanner.close();
     }
 }
