@@ -115,7 +115,7 @@ public class Main {
                         System.out.println("\n--- EDITAR TAREA ---");
                         System.out.println("1. Cambiar título");
                         System.out.println("2. Cambiar descripción");
-                        System.out.println("3. Marcar como completada");
+                        System.out.println("3. Editar estado");
                         System.out.println("4. Volver al menú principal");
                         System.out.print("Seleccione una opción: ");
                         subOpcionEditar = scanner.nextInt();
@@ -178,11 +178,48 @@ public class Main {
                             } while (metodo != 3);
 
                         } else if (subOpcionEditar == 3) {
-                            System.out.print("Ingrese ID de la tarea a marcar como completada: ");
-                            int idCompletar = scanner.nextInt();
-                            scanner.nextLine();
-                            gestor.marcarTareaComoCompletada(idCompletar);
-                            System.out.println("Tarea marcada como completada.");
+                            int subOpcionEstado;
+                            do {
+                                System.out.println("\n--- EDITAR ESTADO ---");
+                                System.out.println("1. Marcar como completada");
+                                System.out.println("2. Marcar como no completada");
+                                System.out.println("3. Volver atrás");
+                                System.out.print("Seleccione una opción: ");
+                                subOpcionEstado = scanner.nextInt();
+                                scanner.nextLine();
+
+                                if (subOpcionEstado == 1 || subOpcionEstado == 2) {
+                                    int metodo;
+                                    do {
+                                        System.out.println("\nElegir tarea por:");
+                                        System.out.println("1. ID");
+                                        System.out.println("2. Nombre de tarea");
+                                        System.out.println("3. Volver atrás");
+                                        metodo = scanner.nextInt();
+                                        scanner.nextLine();
+
+                                        boolean resultado = false;
+                                        if (metodo == 1) {
+                                            System.out.print("Ingrese ID de la tarea: ");
+                                            int id = scanner.nextInt();
+                                            scanner.nextLine();
+                                            resultado = gestor.editarEstadoPorId(id, subOpcionEstado == 1);
+                                        } else if (metodo == 2) {
+                                            System.out.print("Ingrese nombre de la tarea: ");
+                                            String nombre = scanner.nextLine();
+                                            resultado = gestor.editarEstadoPorTitulo(nombre, subOpcionEstado == 1);
+                                        }
+
+                                        if (metodo == 1 || metodo == 2) {
+                                            if (resultado) {
+                                                System.out.println("Estado actualizado correctamente.");
+                                            } else {
+                                                System.out.println("No se pudo actualizar el estado (posible que ya esté en ese estado o no se encontró). Volviendo atrás.");
+                                            }
+                                        }
+                                    } while (metodo != 3);
+                                }
+                            }
                         }
                     } while (subOpcionEditar != 4);
                     break;
