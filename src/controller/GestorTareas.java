@@ -76,16 +76,33 @@ public class GestorTareas {
         }
     }
 
-    public void marcarTareaComoCompletada(int id) {
+    public boolean editarEstadoPorId(int id, boolean completada) {
         for (Tarea tarea : tareas) {
             if (tarea.getId() == id) {
-                tarea.setCompletada(true);
+                if (tarea.isCompletada() == completada) {
+                    return false; // Ya está en el estado deseado
+                }
+                tarea.setCompletada(completada);
                 GestorPersistencia.guardarTareas(tareas);
-                break;
+                return true;
             }
         }
+        return false; // No encontrada
     }
 
+    public boolean editarEstadoPorTitulo(String titulo, boolean completada) {
+        for (Tarea tarea : tareas) {
+            if (tarea.getTitulo().equalsIgnoreCase(titulo)) {
+                if (tarea.isCompletada() == completada) {
+                    return false; // Ya está en el estado deseado
+                }
+                tarea.setCompletada(completada);
+                GestorPersistencia.guardarTareas(tareas);
+                return true;
+            }
+        }
+        return false; // No encontrada
+    }
     public void listarTareas() {
         if (tareas.isEmpty()) {
             System.out.println("No hay tareas disponibles.");

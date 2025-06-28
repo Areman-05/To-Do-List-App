@@ -219,7 +219,7 @@ public class Main {
                                         }
                                     } while (metodo != 3);
                                 }
-                            }
+                            } while (subOpcionEstado != 3);
                         }
                     } while (subOpcionEditar != 4);
                     break;
