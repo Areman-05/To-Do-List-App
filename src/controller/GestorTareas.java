@@ -8,24 +8,20 @@ import java.util.List;
 public class GestorTareas {
     private List<Tarea> tareas;
 
-    // Constructor
     public GestorTareas() {
         this.tareas = GestorPersistencia.cargarTareas();
     }
 
-    // Metodo para agregar una tarea
     public void agregarTarea(Tarea tarea) {
         tareas.add(tarea);
         GestorPersistencia.guardarTareas(tareas);
     }
 
-    // Metodo para eliminar una tarea por ID
     public void eliminarTarea(int id) {
         tareas.removeIf(tarea -> tarea.getId() == id);
         GestorPersistencia.guardarTareas(tareas);
     }
 
-    // Metodo para eliminar una tarea por titulo
     public boolean eliminarTareaPorTitulo(String titulo) {
         Iterator<Tarea> iterator = tareas.iterator();
         while (iterator.hasNext()) {
@@ -39,10 +35,10 @@ public class GestorTareas {
         return false;
     }
 
-    // Metodo para editar título por nombre
     public boolean editarTituloPorNombre(String nombreActual, String nuevoTitulo) {
         for (Tarea tarea : tareas) {
             if (tarea.getTitulo().equalsIgnoreCase(nombreActual)) {
+                System.out.println("Título actual: " + tarea.getTitulo());
                 tarea.setTitulo(nuevoTitulo);
                 GestorPersistencia.guardarTareas(tareas);
                 return true;
@@ -51,10 +47,10 @@ public class GestorTareas {
         return false;
     }
 
-    // Metodo para editar descripción por nombre
     public boolean editarDescripcionPorNombre(String nombreActual, String nuevaDescripcion) {
         for (Tarea tarea : tareas) {
             if (tarea.getTitulo().equalsIgnoreCase(nombreActual)) {
+                System.out.println("Descripción actual: " + tarea.getDescripcion());
                 tarea.setDescripcion(nuevaDescripcion);
                 GestorPersistencia.guardarTareas(tareas);
                 return true;
@@ -63,14 +59,15 @@ public class GestorTareas {
         return false;
     }
 
-    // Metodo para editar una tarea existente por ID
     public void editarTarea(int id, String nuevoTitulo, String nuevaDescripcion) {
         for (Tarea tarea : tareas) {
             if (tarea.getId() == id) {
                 if (nuevoTitulo != null) {
+                    System.out.println("Título actual: " + tarea.getTitulo());
                     tarea.setTitulo(nuevoTitulo);
                 }
                 if (nuevaDescripcion != null) {
+                    System.out.println("Descripción actual: " + tarea.getDescripcion());
                     tarea.setDescripcion(nuevaDescripcion);
                 }
                 GestorPersistencia.guardarTareas(tareas);
@@ -79,7 +76,6 @@ public class GestorTareas {
         }
     }
 
-    // Metodo para marcar una tarea como completada
     public void marcarTareaComoCompletada(int id) {
         for (Tarea tarea : tareas) {
             if (tarea.getId() == id) {
@@ -90,7 +86,6 @@ public class GestorTareas {
         }
     }
 
-    // Metodo para listar todas las tareas
     public void listarTareas() {
         if (tareas.isEmpty()) {
             System.out.println("No hay tareas disponibles.");
@@ -101,7 +96,6 @@ public class GestorTareas {
         }
     }
 
-    // Metodo para generar un nuevo ID único automáticamente
     public int generarNuevoId() {
         int maxId = 0;
         for (Tarea tarea : tareas) {
