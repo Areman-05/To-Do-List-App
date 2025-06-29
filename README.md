@@ -20,16 +20,23 @@ Este proyecto es ideal para mejorar la productividad y el seguimiento de activid
 
 # Tecnologías Utilizadas
 
-- Lenguaje de programación: Java 
-- Estructuras de datos: Uso de listas dinámicas con la clase ArrayList para gestionar las tareas.
-- Entrada y salida de datos: Se emplea Scanner para la interacción con el usuario en consola.
+- Lenguaje de programación: Java.
+- Persistencia: Lectura y escritura de archivos de texto usando clases de entrada/salida (BufferedReader, BufferedWriter).
+- Estructuras de datos: Uso de listas dinámicas con ArrayList para gestionar tareas y empleados.
+- Interacción con el usuario: Consola con Scanner y menús claros y estructurados.
 
 # Estructura del Proyecto
 
-El proyecto está organizado en distintas carpetas para una mejor estructuración y mantenibilidad del código:
+El proyecto está organizado en distintas carpetas para una mayor claridad y mantenibilidad del código:
 
-- src/model: Contiene las clases que representan los datos principales del proyecto, como la clase src.controller.Tarea.
-- src/controller: Abarca la lógica de negocio y las operaciones sobre las tareas, como agregar, eliminar o editar.
-- src/view: Se encarga de la interfaz con el usuario, ya sea por consola o mediante una futura interfaz gráfica con JavaFX.
-- src/Main.java: Archivo principal donde se ejecuta la aplicación y se inicializa el sistema.
-- README.md: Documento explicativo del proyecto y su funcionamiento.
+-src/controller: Contiene las clases de lógica de negocio:
+ - Tarea: Representa una tarea individual.
+ - GestorTareas: Gestiona las operaciones sobre las tareas.
+ - Empleado: Representa un empleado.
+ - GestorEmpleados: Gestiona el registro y verificación de empleados.
+
+- src/persistence: Incluye las clases encargadas de guardar y cargar datos desde archivos de texto:
+  - GestorPersistencia: Gestiona la persistencia de las tareas.
+  - GestorPersistenciaEmpleados: Gestiona la persistencia de los empleados.
+
+-src/Main.java: Contiene el punto de entrada de la aplicación, donde se gestiona la interacción completa con el usuario a través de menús y submenús.
