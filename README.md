@@ -3,8 +3,8 @@ TO-DO-LIST-APP
 
 # Descripción
 
-To-Do List App es una aplicación desarrollada en Java que permite gestionar tareas de manera sencilla. Su objetivo principal es ayudar a los usuarios a organizar su trabajo diario mediante una lista de tareas que pueden ser agregadas, editadas, marcadas como completadas y eliminadas.
-
+To-Do List App es una aplicación desarrollada en Java que permite gestionar tareas de manera sencilla y ordenada. Su objetivo principal es ayudar a los usuarios a organizar y llevar un control de su trabajo diario mediante un sistema que permite añadir, editar, marcar como completadas y eliminar tareas.
+La aplicación incluye además un sistema de empleados que permite el registro e inicio de sesión para controlar el acceso al gestor de tareas, garantizando que solo usuarios registrados puedan gestionar sus tareas.Este proyecto es ideal para mejorar la productividad, practicar conceptos de programación orientada a objetos, y familiarizarse con la persistencia de datos en archivos de texto.
 Este proyecto es ideal para mejorar la productividad y el seguimiento de actividades pendientes, permitiendo una gestión eficiente de tareas en una interfaz simple y accesible.
 
 # Características
