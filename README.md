@@ -29,14 +29,14 @@ Este proyecto es ideal para mejorar la productividad y el seguimiento de activid
 
 El proyecto está organizado en distintas carpetas para una mayor claridad y mantenibilidad del código:
 
--src/controller: Contiene las clases de lógica de negocio:
+src/controller: Contiene las clases de lógica de negocio:
 - Tarea: Representa una tarea individual.
 - GestorTareas: Gestiona las operaciones sobre las tareas.
 - Empleado: Representa un empleado.
 - GestorEmpleados: Gestiona el registro y verificación de empleados.
   
-- src/persistence: Incluye las clases encargadas de guardar y cargar datos desde archivos de texto:
+src/persistence: Incluye las clases encargadas de guardar y cargar datos desde archivos de texto:
 - GestorPersistencia: Gestiona la persistencia de las tareas.
 - GestorPersistenciaEmpleados: Gestiona la persistencia de los empleados.
   
--src/Main.java: Contiene el punto de entrada de la aplicación, donde se gestiona la interacción completa con el usuario a través de menús y submenús.
+src/Main.java: Contiene el punto de entrada de la aplicación, donde se gestiona la interacción completa con el usuario a través de menús y submenús.
