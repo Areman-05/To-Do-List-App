@@ -9,11 +9,14 @@ Este proyecto es ideal para mejorar la productividad y el seguimiento de activid
 
 # Características
 
-- Agregar tareas: Permite a los usuarios crear nuevas tareas especificando un título y, opcionalmente, una descripción.
-- Marcar tareas como completadas: Los usuarios pueden indicar cuáles de sus tareas ya han sido realizadas para mantener un seguimiento claro.
-- Eliminar tareas: Las tareas que ya no sean necesarias pueden ser eliminadas de la lista para mantener la organización.
-- Editar tareas: Se puede modificar el contenido de una tarea en caso de errores o cambios en la planificación.
--Listar todas las tareas: Se mostrará un listado de todas las tareas creadas, diferenciando las pendientes de las completadas.
+- Registro e inicio de sesión de empleados: solo los empleados registrados pueden acceder al gestor de tareas.
+- Agregar tareas: creación de tareas nuevas especificando un título y, opcionalmente, una descripción; el sistema asigna automáticamente un ID único.
+- Editar tareas: modificar el título, la descripción o el estado (completada / no completada) de una tarea mediante submenús intuitivos.
+- Eliminar tareas: borrar tareas por ID o por nombre para mayor comodidad.
+- Listar tareas: mostrar todas las tareas creadas diferenciando claramente las completadas de las no completadas (✔ o ✘).
+- Persistencia de datos: las tareas y empleados se guardan automáticamente en archivos de texto para que la información se mantenga entre ejecuciones.
+
+
 
 # Tecnologías Utilizadas
 
