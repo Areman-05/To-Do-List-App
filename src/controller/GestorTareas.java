@@ -1,7 +1,7 @@
 package src.controller;
 
 import src.persistence.GestorPersistencia;
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -121,5 +121,44 @@ public class GestorTareas {
             }
         }
         return maxId + 1;
+    }
+
+    public boolean tituloValido(String titulo) {
+        return titulo != null && !titulo.trim().isEmpty();
+    }
+
+    public boolean existeTitulo(String titulo) {
+        for (Tarea tarea : tareas) {
+            if (tarea.getTitulo().equalsIgnoreCase(titulo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void listarTareasOrdenadasPorEstado() {
+        tareas.stream()
+                .sorted(Comparator.comparing(Tarea::isCompletada))
+                .forEach(System.out::println);
+    }
+
+    public void listarTareasOrdenadasPorTitulo() {
+        tareas.stream()
+                .sorted(Comparator.comparing(Tarea::getTitulo))
+                .forEach(System.out::println);
+    }
+
+    public void buscarTareas(String palabraClave) {
+        boolean encontrada = false;
+        for (Tarea tarea : tareas) {
+            if (tarea.getTitulo().toLowerCase().contains(palabraClave.toLowerCase()) ||
+                    tarea.getDescripcion().toLowerCase().contains(palabraClave.toLowerCase())) {
+                System.out.println(tarea);
+                encontrada = true;
+            }
+        }
+        if (!encontrada) {
+            System.out.println("No se encontraron tareas con esa palabra clave.");
+        }
     }
 }
