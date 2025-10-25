@@ -19,7 +19,7 @@ public class Main {
             System.out.print("Seleccione una opción: ");
 
             int opcionLogin = scanner.nextInt();
-            scanner.nextLine(); // limpiar buffer
+            scanner.nextLine();
 
             if (opcionLogin == 1) {
                 System.out.print("Ingrese su ID de empleado: ");
@@ -49,7 +49,6 @@ public class Main {
             }
         }
 
-        // Acceso concedido, se entra al gestor de tareas
         GestorTareas gestor = new GestorTareas();
         int opcion;
 
@@ -59,16 +58,27 @@ public class Main {
             System.out.println("2. Eliminar tarea");
             System.out.println("3. Editar tarea");
             System.out.println("4. Listar tareas");
-            System.out.println("5. Salir");
+            System.out.println("5. Buscar tareas");
+            System.out.println("6. Salir");
             System.out.print("Seleccione una opción: ");
 
             opcion = scanner.nextInt();
-            scanner.nextLine(); // Limpiar buffer
+            scanner.nextLine();
 
             switch (opcion) {
                 case 1:
                     System.out.print("Ingrese título de la tarea: ");
                     String titulo = scanner.nextLine();
+
+                    if (!gestor.tituloValido(titulo)) {
+                        System.out.println("El título no puede estar vacío.");
+                        break;
+                    }
+                    if (gestor.existeTitulo(titulo)) {
+                        System.out.println("Ya existe una tarea con ese título.");
+                        break;
+                    }
+
                     System.out.print("Ingrese descripción de la tarea (opcional): ");
                     String descripcion = scanner.nextLine();
 
@@ -77,12 +87,13 @@ public class Main {
                     gestor.agregarTarea(nuevaTarea);
                     System.out.println("Tarea agregada con ID " + nuevoId + ".");
                     break;
+
                 case 2:
                     int opcionEliminar;
                     do {
                         System.out.println("\n--- ELIMINAR TAREA ---");
                         System.out.println("1. Eliminar por ID");
-                        System.out.println("2. Eliminar por titulo de tarea");
+                        System.out.println("2. Eliminar por título de tarea");
                         System.out.println("3. Volver al menú principal");
                         System.out.print("Seleccione una opción: ");
 
@@ -109,6 +120,7 @@ public class Main {
                         }
                     } while (opcionEliminar != 3);
                     break;
+
                 case 3:
                     int subOpcionEditar;
                     do {
@@ -214,7 +226,7 @@ public class Main {
                                             if (resultado) {
                                                 System.out.println("Estado actualizado correctamente.");
                                             } else {
-                                                System.out.println("No se pudo actualizar el estado (posible que ya esté en ese estado o no se encontró). Volviendo atrás.");
+                                                System.out.println("No se pudo actualizar el estado. Verifique los datos.");
                                             }
                                         }
                                     } while (metodo != 3);
@@ -222,20 +234,40 @@ public class Main {
                             } while (subOpcionEstado != 3);
                         }
                     } while (subOpcionEditar != 4);
-                    break;
+
                 case 4:
                     System.out.println("\n=== LISTA DE TAREAS ===");
-                    gestor.listarTareas();
+                    System.out.println("1. Listar todas");
+                    System.out.println("2. Ordenadas por estado");
+                    System.out.println("3. Ordenadas por título");
+                    System.out.print("Seleccione una opción: ");
+                    int subOpcionListar = scanner.nextInt();
+                    scanner.nextLine();
+
+                    switch (subOpcionListar) {
+                        case 1 -> gestor.listarTareas();
+                        case 2 -> gestor.listarTareasOrdenadasPorEstado();
+                        case 3 -> gestor.listarTareasOrdenadasPorTitulo();
+                        default -> System.out.println("Opción no válida.");
+                    }
                     System.out.println("=======================\n");
                     break;
 
                 case 5:
+                    System.out.print("Ingrese palabra clave para buscar: ");
+                    String clave = scanner.nextLine();
+                    gestor.buscarTareas(clave);
+                    break;
+
+                case 6:
                     System.out.println("Saliendo del programa...");
                     break;
+
                 default:
                     System.out.println("Opción no válida, intente de nuevo.");
             }
-        } while (opcion != 5);
+        } while (opcion != 6);
+
         scanner.close();
     }
 }
