@@ -15,11 +15,13 @@ public class GestorTareas {
     public void agregarTarea(Tarea tarea) {
         tareas.add(tarea);
         GestorPersistencia.guardarTareas(tareas);
+        GestorPersistencia.registrarHistorial("Tarea agregada: " + tarea.getTitulo());
     }
 
     public void eliminarTarea(int id) {
         tareas.removeIf(tarea -> tarea.getId() == id);
         GestorPersistencia.guardarTareas(tareas);
+        GestorPersistencia.registrarHistorial("Tarea eliminada por ID: " + id);
     }
 
     public boolean eliminarTareaPorTitulo(String titulo) {
@@ -29,6 +31,7 @@ public class GestorTareas {
             if (tarea.getTitulo().equalsIgnoreCase(titulo)) {
                 iterator.remove();
                 GestorPersistencia.guardarTareas(tareas);
+                GestorPersistencia.registrarHistorial("Tarea eliminada por título: " + titulo);
                 return true;
             }
         }
@@ -38,9 +41,9 @@ public class GestorTareas {
     public boolean editarTituloPorNombre(String nombreActual, String nuevoTitulo) {
         for (Tarea tarea : tareas) {
             if (tarea.getTitulo().equalsIgnoreCase(nombreActual)) {
-                System.out.println("Título actual: " + tarea.getTitulo());
                 tarea.setTitulo(nuevoTitulo);
                 GestorPersistencia.guardarTareas(tareas);
+                GestorPersistencia.registrarHistorial("Título editado: '" + nombreActual + "' → '" + nuevoTitulo + "'");
                 return true;
             }
         }
@@ -50,9 +53,9 @@ public class GestorTareas {
     public boolean editarDescripcionPorNombre(String nombreActual, String nuevaDescripcion) {
         for (Tarea tarea : tareas) {
             if (tarea.getTitulo().equalsIgnoreCase(nombreActual)) {
-                System.out.println("Descripción actual: " + tarea.getDescripcion());
                 tarea.setDescripcion(nuevaDescripcion);
                 GestorPersistencia.guardarTareas(tareas);
+                GestorPersistencia.registrarHistorial("Descripción editada para tarea: " + nombreActual);
                 return true;
             }
         }
@@ -63,14 +66,13 @@ public class GestorTareas {
         for (Tarea tarea : tareas) {
             if (tarea.getId() == id) {
                 if (nuevoTitulo != null) {
-                    System.out.println("Título actual: " + tarea.getTitulo());
                     tarea.setTitulo(nuevoTitulo);
                 }
                 if (nuevaDescripcion != null) {
-                    System.out.println("Descripción actual: " + tarea.getDescripcion());
                     tarea.setDescripcion(nuevaDescripcion);
                 }
                 GestorPersistencia.guardarTareas(tareas);
+                GestorPersistencia.registrarHistorial("Tarea editada (ID " + id + ")");
                 break;
             }
         }
@@ -80,29 +82,32 @@ public class GestorTareas {
         for (Tarea tarea : tareas) {
             if (tarea.getId() == id) {
                 if (tarea.isCompletada() == completada) {
-                    return false; // Ya está en el estado deseado
+                    return false;
                 }
                 tarea.setCompletada(completada);
                 GestorPersistencia.guardarTareas(tareas);
+                GestorPersistencia.registrarHistorial("Estado actualizado para tarea ID " + id + " → " + (completada ? "✔ Completada" : "✘ No completada"));
                 return true;
             }
         }
-        return false; // No encontrada
+        return false;
     }
 
     public boolean editarEstadoPorTitulo(String titulo, boolean completada) {
         for (Tarea tarea : tareas) {
             if (tarea.getTitulo().equalsIgnoreCase(titulo)) {
                 if (tarea.isCompletada() == completada) {
-                    return false; // Ya está en el estado deseado
+                    return false;
                 }
                 tarea.setCompletada(completada);
                 GestorPersistencia.guardarTareas(tareas);
+                GestorPersistencia.registrarHistorial("Estado actualizado para tarea '" + titulo + "' → " + (completada ? "✔ Completada" : "✘ No completada"));
                 return true;
             }
         }
-        return false; // No encontrada
+        return false;
     }
+
     public void listarTareas() {
         if (tareas.isEmpty()) {
             System.out.println("No hay tareas disponibles.");

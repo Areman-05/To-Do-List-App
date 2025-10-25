@@ -42,4 +42,15 @@ public class GestorPersistencia {
         }
         return tareas;
     }
+
+    private static final String ARCHIVO_HISTORIAL = "historial.txt";
+
+    public static void registrarHistorial(String mensaje) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARCHIVO_HISTORIAL, true))) {
+            writer.write(java.time.LocalDateTime.now() + " - " + mensaje);
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Error al registrar historial: " + e.getMessage());
+        }
+    }
 }
