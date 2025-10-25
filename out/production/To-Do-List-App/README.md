@@ -3,30 +3,40 @@ TO-DO-LIST-APP
 
 # Descripción
 
-To-Do List App es una aplicación desarrollada en Java que permite gestionar tareas de manera sencilla. Su objetivo principal es ayudar a los usuarios a organizar su trabajo diario mediante una lista de tareas que pueden ser agregadas, editadas, marcadas como completadas y eliminadas.
-
+To-Do List App es una aplicación desarrollada en Java que permite gestionar tareas de manera sencilla y ordenada. Su objetivo principal es ayudar a los usuarios a organizar y llevar un control de su trabajo diario mediante un sistema que permite añadir, editar, marcar como completadas y eliminar tareas.
+La aplicación incluye además un sistema de empleados que permite el registro e inicio de sesión para controlar el acceso al gestor de tareas, garantizando que solo usuarios registrados puedan gestionar sus tareas.Este proyecto es ideal para mejorar la productividad, practicar conceptos de programación orientada a objetos, y familiarizarse con la persistencia de datos en archivos de texto.
 Este proyecto es ideal para mejorar la productividad y el seguimiento de actividades pendientes, permitiendo una gestión eficiente de tareas en una interfaz simple y accesible.
 
 # Características
 
-- Agregar tareas: Permite a los usuarios crear nuevas tareas especificando un título y, opcionalmente, una descripción.
-- Marcar tareas como completadas: Los usuarios pueden indicar cuáles de sus tareas ya han sido realizadas para mantener un seguimiento claro.
-- Eliminar tareas: Las tareas que ya no sean necesarias pueden ser eliminadas de la lista para mantener la organización.
-- Editar tareas: Se puede modificar el contenido de una tarea en caso de errores o cambios en la planificación.
--Listar todas las tareas: Se mostrará un listado de todas las tareas creadas, diferenciando las pendientes de las completadas.
+- Registro e inicio de sesión de empleados: solo los empleados registrados pueden acceder al gestor de tareas.
+- Agregar tareas: creación de tareas nuevas especificando un título y, opcionalmente, una descripción; el sistema asigna automáticamente un ID único.
+- Editar tareas: modificar el título, la descripción o el estado (completada / no completada) de una tarea mediante submenús intuitivos.
+- Eliminar tareas: borrar tareas por ID o por nombre para mayor comodidad.
+- Listar tareas: mostrar todas las tareas creadas diferenciando claramente las completadas de las no completadas (✔ o ✘).
+- Persistencia de datos: las tareas y empleados se guardan automáticamente en archivos de texto para que la información se mantenga entre ejecuciones.
+
+
 
 # Tecnologías Utilizadas
 
-- Lenguaje de programación: Java 
-- Estructuras de datos: Uso de listas dinámicas con la clase ArrayList para gestionar las tareas.
-- Entrada y salida de datos: Se emplea Scanner para la interacción con el usuario en consola.
+- Lenguaje de programación: Java.
+- Persistencia: Lectura y escritura de archivos de texto usando clases de entrada/salida (BufferedReader, BufferedWriter).
+- Estructuras de datos: Uso de listas dinámicas con ArrayList para gestionar tareas y empleados.
+- Interacción con el usuario: Consola con Scanner y menús claros y estructurados.
 
 # Estructura del Proyecto
 
-El proyecto está organizado en distintas carpetas para una mejor estructuración y mantenibilidad del código:
+El proyecto está organizado en distintas carpetas para una mayor claridad y mantenibilidad del código:
 
-- src/model: Contiene las clases que representan los datos principales del proyecto, como la clase src.controller.Tarea.
-- src/controller: Abarca la lógica de negocio y las operaciones sobre las tareas, como agregar, eliminar o editar.
-- src/view: Se encarga de la interfaz con el usuario, ya sea por consola o mediante una futura interfaz gráfica con JavaFX.
-- src/Main.java: Archivo principal donde se ejecuta la aplicación y se inicializa el sistema.
-- README.md: Documento explicativo del proyecto y su funcionamiento.
+src/controller: Contiene las clases de lógica de negocio:
+- Tarea: Representa una tarea individual.
+- GestorTareas: Gestiona las operaciones sobre las tareas.
+- Empleado: Representa un empleado.
+- GestorEmpleados: Gestiona el registro y verificación de empleados.
+  
+src/persistence: Incluye las clases encargadas de guardar y cargar datos desde archivos de texto:
+- GestorPersistencia: Gestiona la persistencia de las tareas.
+- GestorPersistenciaEmpleados: Gestiona la persistencia de los empleados.
+  
+src/Main.java: Contiene el punto de entrada de la aplicación, donde se gestiona la interacción completa con el usuario a través de menús y submenús.
