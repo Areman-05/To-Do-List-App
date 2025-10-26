@@ -4,12 +4,14 @@ import java.util.Scanner;
 import src.controller.GestorTareas;
 import src.controller.GestorEmpleados;
 import src.controller.Tarea;
+import src.controller.Empleado;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         GestorEmpleados gestorEmpleados = new GestorEmpleados();
         int idEmpleado = -1;
+        Empleado empleadoActual = null;
 
         while (true) {
             System.out.println("\n--- BIENVENIDO ---");
@@ -26,7 +28,8 @@ public class Main {
                 idEmpleado = scanner.nextInt();
                 scanner.nextLine();
                 if (gestorEmpleados.verificarEmpleado(idEmpleado)) {
-                    System.out.println("Acceso concedido. Bienvenido, empleado " + idEmpleado);
+                    empleadoActual = gestorEmpleados.obtenerEmpleado(idEmpleado);
+                    System.out.println("Acceso concedido. Bienvenido, " + empleadoActual.getRol() + " " + idEmpleado);
                     break;
                 } else {
                     System.out.println("ID no registrado. Intente nuevamente.");
@@ -35,8 +38,16 @@ public class Main {
                 System.out.print("Ingrese un nuevo ID para registrarse: ");
                 int nuevoId = scanner.nextInt();
                 scanner.nextLine();
-                if (gestorEmpleados.registrarEmpleado(nuevoId)) {
-                    System.out.println("Empleado registrado exitosamente. Ahora puede iniciar sesión.");
+                System.out.print("Ingrese rol (admin/empleado): ");
+                String rolInput = scanner.nextLine().toLowerCase();
+
+                if (!rolInput.equals("admin") && !rolInput.equals("empleado")) {
+                    System.out.println("Rol inválido. Use 'admin' o 'empleado'.");
+                    break;
+                }
+
+                if (gestorEmpleados.registrarEmpleado(nuevoId, rolInput)) {
+                    System.out.println("Empleado registrado exitosamente como " + rolInput + ". Ahora puede iniciar sesión.");
                 } else {
                     System.out.println("Ese ID ya está registrado. Intente con otro.");
                 }
@@ -83,12 +94,17 @@ public class Main {
                     String descripcion = scanner.nextLine();
 
                     int nuevoId = gestor.generarNuevoId();
-                    Tarea nuevaTarea = new Tarea(nuevoId, titulo, descripcion);
+                    Tarea nuevaTarea = new Tarea(nuevoId, titulo + " [ID:" + idEmpleado + "]", descripcion);
                     gestor.agregarTarea(nuevaTarea);
                     System.out.println("Tarea agregada con ID " + nuevoId + ".");
                     break;
 
                 case 2:
+                    if (!empleadoActual.getRol().equals("admin")) {
+                        System.out.println("Acceso denegado. Solo los administradores pueden eliminar tareas.");
+                        break;
+                    }
+
                     int opcionEliminar;
                     do {
                         System.out.println("\n--- ELIMINAR TAREA ---");
@@ -133,107 +149,40 @@ public class Main {
                         subOpcionEditar = scanner.nextInt();
                         scanner.nextLine();
 
-                        if (subOpcionEditar == 1) {
-                            int metodo;
-                            do {
-                                System.out.println("\nEditar título por:");
-                                System.out.println("1. ID");
-                                System.out.println("2. Nombre de tarea");
-                                System.out.println("3. Volver atrás");
-                                metodo = scanner.nextInt();
-                                scanner.nextLine();
+                        if (subOpcionEditar == 1 || subOpcionEditar == 2 || subOpcionEditar == 3) {
+                            System.out.print("Ingrese el título de la tarea a editar: ");
+                            String tituloEditar = scanner.nextLine();
 
-                                if (metodo == 1) {
-                                    System.out.print("Ingrese ID de la tarea: ");
-                                    int id = scanner.nextInt();
-                                    scanner.nextLine();
-                                    System.out.print("Nuevo título: ");
-                                    String nuevoTitulo = scanner.nextLine();
-                                    gestor.editarTarea(id, nuevoTitulo, null);
-                                    System.out.println("Título actualizado.");
-                                } else if (metodo == 2) {
-                                    System.out.print("Ingrese nombre actual de la tarea: ");
-                                    String nombre = scanner.nextLine();
-                                    System.out.print("Nuevo título: ");
-                                    String nuevoTitulo = scanner.nextLine();
-                                    gestor.editarTituloPorNombre(nombre, nuevoTitulo);
-                                    System.out.println("Título actualizado.");
+                            if (!empleadoActual.getRol().equals("admin") &&
+                                    !tituloEditar.contains("[ID:" + idEmpleado + "]")) {
+                                System.out.println("No tienes permiso para editar esta tarea.");
+                                break;
+                            }
+
+                            if (subOpcionEditar == 1) {
+                                System.out.print("Nuevo título: ");
+                                String nuevoTitulo = scanner.nextLine();
+                                gestor.editarTituloPorNombre(tituloEditar, nuevoTitulo + " [ID:" + idEmpleado + "]");
+                                System.out.println("Título actualizado.");
+                            } else if (subOpcionEditar == 2) {
+                                System.out.print("Nueva descripción: ");
+                                String nuevaDesc = scanner.nextLine();
+                                gestor.editarDescripcionPorNombre(tituloEditar, nuevaDesc);
+                                System.out.println("Descripción actualizada.");
+                            } else {
+                                System.out.print("¿Marcar como completada? (s/n): ");
+                                String estado = scanner.nextLine().toLowerCase();
+                                boolean completada = estado.equals("s");
+                                boolean resultado = gestor.editarEstadoPorTitulo(tituloEditar, completada);
+                                if (resultado) {
+                                    System.out.println("Estado actualizado correctamente.");
+                                } else {
+                                    System.out.println("No se pudo actualizar el estado.");
                                 }
-                            } while (metodo != 3);
-
-                        } else if (subOpcionEditar == 2) {
-                            int metodo;
-                            do {
-                                System.out.println("\nEditar descripción por:");
-                                System.out.println("1. ID");
-                                System.out.println("2. Nombre de tarea");
-                                System.out.println("3. Volver atrás");
-                                metodo = scanner.nextInt();
-                                scanner.nextLine();
-
-                                if (metodo == 1) {
-                                    System.out.print("Ingrese ID de la tarea: ");
-                                    int id = scanner.nextInt();
-                                    scanner.nextLine();
-                                    System.out.print("Nueva descripción: ");
-                                    String nuevaDesc = scanner.nextLine();
-                                    gestor.editarTarea(id, null, nuevaDesc);
-                                    System.out.println("Descripción actualizada.");
-                                } else if (metodo == 2) {
-                                    System.out.print("Ingrese nombre actual de la tarea: ");
-                                    String nombre = scanner.nextLine();
-                                    System.out.print("Nueva descripción: ");
-                                    String nuevaDesc = scanner.nextLine();
-                                    gestor.editarDescripcionPorNombre(nombre, nuevaDesc);
-                                    System.out.println("Descripción actualizada.");
-                                }
-                            } while (metodo != 3);
-
-                        } else if (subOpcionEditar == 3) {
-                            int subOpcionEstado;
-                            do {
-                                System.out.println("\n--- EDITAR ESTADO ---");
-                                System.out.println("1. Marcar como completada");
-                                System.out.println("2. Marcar como no completada");
-                                System.out.println("3. Volver atrás");
-                                System.out.print("Seleccione una opción: ");
-                                subOpcionEstado = scanner.nextInt();
-                                scanner.nextLine();
-
-                                if (subOpcionEstado == 1 || subOpcionEstado == 2) {
-                                    int metodo;
-                                    do {
-                                        System.out.println("\nElegir tarea por:");
-                                        System.out.println("1. ID");
-                                        System.out.println("2. Nombre de tarea");
-                                        System.out.println("3. Volver atrás");
-                                        metodo = scanner.nextInt();
-                                        scanner.nextLine();
-
-                                        boolean resultado = false;
-                                        if (metodo == 1) {
-                                            System.out.print("Ingrese ID de la tarea: ");
-                                            int id = scanner.nextInt();
-                                            scanner.nextLine();
-                                            resultado = gestor.editarEstadoPorId(id, subOpcionEstado == 1);
-                                        } else if (metodo == 2) {
-                                            System.out.print("Ingrese nombre de la tarea: ");
-                                            String nombre = scanner.nextLine();
-                                            resultado = gestor.editarEstadoPorTitulo(nombre, subOpcionEstado == 1);
-                                        }
-
-                                        if (metodo == 1 || metodo == 2) {
-                                            if (resultado) {
-                                                System.out.println("Estado actualizado correctamente.");
-                                            } else {
-                                                System.out.println("No se pudo actualizar el estado. Verifique los datos.");
-                                            }
-                                        }
-                                    } while (metodo != 3);
-                                }
-                            } while (subOpcionEstado != 3);
+                            }
                         }
                     } while (subOpcionEditar != 4);
+                    break;
 
                 case 4:
                     System.out.println("\n=== LISTA DE TAREAS ===");
