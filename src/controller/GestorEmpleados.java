@@ -10,18 +10,11 @@ public class GestorEmpleados {
         this.empleados = GestorPersistenciaEmpleados.cargarEmpleados();
     }
 
-    public boolean registrarEmpleado(int id, String rolUsuario) {
+    public boolean registrarEmpleado(int id, String rol) {
         if (verificarEmpleado(id)) return false;
-        empleados.add(new Empleado(id, rolUsuario));
+        empleados.add(new Empleado(id, rol));
         GestorPersistenciaEmpleados.guardarEmpleados(empleados);
         return true;
-    }
-
-    public Empleado obtenerEmpleado(int id) {
-        for (Empleado e : empleados) {
-            if (e.getId() == id) return e;
-        }
-        return null;
     }
 
     public boolean verificarEmpleado(int id) {
@@ -29,5 +22,12 @@ public class GestorEmpleados {
             if (e.getId() == id) return true;
         }
         return false;
+    }
+
+    public Empleado obtenerEmpleado(int id) {
+        for (Empleado e : empleados) {
+            if (e.getId() == id) return e;
+        }
+        return null;
     }
 }

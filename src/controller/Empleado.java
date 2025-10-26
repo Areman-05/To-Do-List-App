@@ -2,23 +2,17 @@ package src.controller;
 
 public class Empleado {
     private int id;
-    private String rol; // "admin" o "empleado"
 
-    public Empleado(int id, String rol) {
+    public Empleado(int id) {
         this.id = id;
-        this.rol = rol;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getRol() {
-        return rol;
-    }
-
     @Override
     public String toString() {
-        return "Empleado[ID=" + id + ", Rol=" + rol + "]";
+        return "Empleado[ID=" + id + "]";
     }
 }
