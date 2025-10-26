@@ -2,31 +2,35 @@ package src.persistence;
 
 import src.controller.Tarea;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GestorPersistencia {
-    private static final String ARCHIVO_TAREAS = "tareas.txt";
+    private static final String ARCHIVO_TAREAS = "tareas.csv";
+    private static final String BACKUP_TAREAS = "tareas_backup.csv";
 
-    // Método para guardar las tareas en un archivo
     public static void guardarTareas(List<Tarea> tareas) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARCHIVO_TAREAS))) {
             for (Tarea tarea : tareas) {
-                writer.write(tarea.getId() + "," + tarea.getTitulo() + "," + tarea.getDescripcion() + "," + tarea.isCompletada());
+                writer.write(tarea.getId() + "," +
+                        tarea.getTitulo().replace(",", " ") + "," +
+                        tarea.getDescripcion().replace(",", " ") + "," +
+                        tarea.isCompletada());
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Error al guardar las tareas: " + e.getMessage());
+            System.out.println("Error al guardar tareas: " + e.getMessage());
         }
     }
 
-    // Método para cargar las tareas desde un archivo
     public static List<Tarea> cargarTareas() {
         List<Tarea> tareas = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(ARCHIVO_TAREAS))) {
+        File archivo = new File(ARCHIVO_TAREAS);
+        if (!archivo.exists()) return tareas;
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
-                String[] partes = linea.split(",");
+                String[] partes = linea.split(",", -1);
                 if (partes.length == 4) {
                     int id = Integer.parseInt(partes[0]);
                     String titulo = partes[1];
@@ -38,19 +42,24 @@ public class GestorPersistencia {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error al cargar las tareas: " + e.getMessage());
+            System.out.println("Error al cargar tareas: " + e.getMessage());
         }
         return tareas;
     }
 
-    private static final String ARCHIVO_HISTORIAL = "historial.txt";
-
-    public static void registrarHistorial(String mensaje) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARCHIVO_HISTORIAL, true))) {
-            writer.write(java.time.LocalDateTime.now() + " - " + mensaje);
-            writer.newLine();
+    public static void backupTareas() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(ARCHIVO_TAREAS));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(BACKUP_TAREAS))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                writer.write(linea);
+                writer.newLine();
+            }
         } catch (IOException e) {
-            System.out.println("Error al registrar historial: " + e.getMessage());
+            System.out.println("Error al crear backup de tareas: " + e.getMessage());
         }
+    }
+
+    public static void registrarHistorial(String s) {
     }
 }

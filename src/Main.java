@@ -4,6 +4,8 @@ import java.util.Scanner;
 import src.controller.GestorTareas;
 import src.controller.GestorEmpleados;
 import src.controller.Tarea;
+import src.persistence.GestorPersistencia;
+import src.persistence.GestorPersistenciaEmpleados;
 
 public class Main {
     public static void main(String[] args) {
@@ -35,8 +37,14 @@ public class Main {
                 System.out.print("Ingrese un nuevo ID para registrarse: ");
                 int nuevoId = scanner.nextInt();
                 scanner.nextLine();
-                if (gestorEmpleados.registrarEmpleado(nuevoId)) {
-                    System.out.println("Empleado registrado exitosamente. Ahora puede iniciar sesión.");
+                System.out.print("Ingrese rol (admin/empleado): ");
+                String rolInput = scanner.nextLine().toLowerCase();
+                if (!rolInput.equals("admin") && !rolInput.equals("empleado")) {
+                    System.out.println("Rol inválido. Use 'admin' o 'empleado'.");
+                    break;
+                }
+                if (gestorEmpleados.registrarEmpleado(nuevoId, rolInput)) {
+                    System.out.println("Empleado registrado exitosamente como " + rolInput + ". Ahora puede iniciar sesión.");
                 } else {
                     System.out.println("Ese ID ya está registrado. Intente con otro.");
                 }
@@ -268,6 +276,8 @@ public class Main {
             }
         } while (opcion != 6);
 
+        GestorPersistencia.backupTareas();
+        GestorPersistenciaEmpleados.backupEmpleados();
         scanner.close();
     }
 }
