@@ -48,7 +48,9 @@ public class GestorPersistencia {
     }
 
     public static void backupTareas() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(ARCHIVO_TAREAS));
+        File archivo = new File(ARCHIVO_TAREAS);
+        if (!archivo.exists()) return;
+        try (BufferedReader reader = new BufferedReader(new FileReader(archivo));
              BufferedWriter writer = new BufferedWriter(new FileWriter(BACKUP_TAREAS))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
@@ -59,6 +61,7 @@ public class GestorPersistencia {
             System.out.println("Error al crear backup de tareas: " + e.getMessage());
         }
     }
+
 
     public static void registrarHistorial(String s) {
     }

@@ -41,7 +41,9 @@ public class GestorPersistenciaEmpleados {
     }
 
     public static void backupEmpleados() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(ARCHIVO_EMPLEADOS));
+        File archivo = new File(ARCHIVO_EMPLEADOS);
+        if (!archivo.exists()) return;
+        try (BufferedReader reader = new BufferedReader(new FileReader(archivo));
              BufferedWriter writer = new BufferedWriter(new FileWriter(BACKUP_EMPLEADOS))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
