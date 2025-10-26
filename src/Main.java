@@ -35,8 +35,16 @@ public class Main {
                 System.out.print("Ingrese un nuevo ID para registrarse: ");
                 int nuevoId = scanner.nextInt();
                 scanner.nextLine();
-                if (gestorEmpleados.registrarEmpleado(nuevoId)) {
-                    System.out.println("Empleado registrado exitosamente. Ahora puede iniciar sesión.");
+                System.out.print("Ingrese rol (admin/empleado): ");
+                String rol = scanner.nextLine().toLowerCase();
+
+                if (!rol.equals("admin") && !rol.equals("empleado")) {
+                    System.out.println("Rol inválido. Use 'admin' o 'empleado'.");
+                    break;
+                }
+
+                if (gestorEmpleados.registrarEmpleado(nuevoId, rol)) {
+                    System.out.println("Empleado registrado exitosamente como " + rol + ". Ahora puede iniciar sesión.");
                 } else {
                     System.out.println("Ese ID ya está registrado. Intente con otro.");
                 }
