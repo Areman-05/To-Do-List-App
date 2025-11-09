@@ -21,9 +21,8 @@ Este proyecto es ideal para mejorar la productividad y el seguimiento de activid
 # Tecnologías Utilizadas
 
 - Lenguaje de programación: Java 17.
-- Gestión de dependencias y construcción: Maven.
 - Persistencia híbrida: SQLite (principal) con respaldo automático en archivos CSV.
-- Testing: JUnit 5.
+- Scripts de apoyo: PowerShell sencillo (`scripts/*.ps1`) para compilar, probar y ejecutar sin herramientas externas.
 - Estructuras de datos: Uso de listas dinámicas con ArrayList para gestionar tareas y empleados.
 - Interacción con el usuario: Consola con Scanner y menús claros y estructurados.
 
@@ -31,44 +30,49 @@ Este proyecto es ideal para mejorar la productividad y el seguimiento de activid
 
 ## Requisitos previos
 
-- Java 17 o superior instalado y disponible en el `PATH`.
-- Maven 3.9 o superior.
+- JDK 17 (se usa `javac` y `java` directamente).
+- PowerShell 5+ (incluido en Windows) para ejecutar los scripts provistos.
 
-## Ejecución
+> El repositorio incluye el controlador `sqlite-jdbc.jar` en la carpeta `lib/` para que no tengas que descargar nada adicional.
 
-1. Instala las dependencias y compila el proyecto:
+## Scripts disponibles
 
-   ```bash
-   mvn clean package
-   ```
+Todos los scripts se encuentran en la carpeta `scripts/`. Si tu política de ejecución no permite correrlos, puedes habilitarlos temporalmente con `Set-ExecutionPolicy -Scope Process Bypass`.
 
-2. Ejecuta la aplicación:
+| Script | Descripción |
+|--------|-------------|
+| `scripts/compilar.ps1` | Compila el código en `out/`. Usa `-IncluirTests` para compilar también los tests. |
+| `scripts/ejecutar.ps1` | Ejecuta la aplicación. Si no existe la carpeta `out/`, compila automáticamente primero. |
+| `scripts/probar.ps1`   | Compila (incluyendo los tests) y ejecuta el pequeño runner de pruebas integrado. |
 
-   ```bash
-   mvn exec:java -Dexec.mainClass="src.Main"
-   ```
+Ejemplo de uso desde PowerShell (ubicado en la raíz del proyecto):
 
-   > El primer arranque creará la base de datos SQLite en `data/todolist.db` junto con los archivos CSV (`tareas.csv`, `empleados.csv`) y el historial (`historial.log`).
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\compilar.ps1
+powershell -ExecutionPolicy Bypass -File scripts\ejecutar.ps1
+powershell -ExecutionPolicy Bypass -File scripts\probar.ps1
+```
+
+## Ejecución manual (sin scripts)
+
+Si prefieres no usar PowerShell, puedes hacerlo todo con dos comandos:
+
+```powershell
+javac -cp lib\sqlite-jdbc.jar -d out (Get-ChildItem -Recurse src\main\java\*.java).FullName
+java -cp "out;lib\sqlite-jdbc.jar" src.Main
+```
+
+> El primer arranque creará la base de datos SQLite en `data/todolist.db` junto con los archivos CSV (`tareas.csv`, `empleados.csv`) y el historial (`historial.log`).
 
 ## Personalización de rutas
 
-Para entornos de prueba o despliegues personalizados, puedes redefinir las rutas mediante propiedades del sistema al iniciar la JVM:
+Puedes redefinir la ubicación de la base de datos al ejecutar el script `ejecutar.ps1`:
 
-- `todolist.db.url` – Ruta JDBC de la base de datos (por defecto `jdbc:sqlite:data/todolist.db`).
-- `todolist.tareas.csv` – Archivo principal de tareas (por defecto `tareas.csv`).
-- `todolist.tareas.backup.csv` – Copia de seguridad de tareas (por defecto `tareas_backup.csv`).
-- `todolist.empleados.csv` – Archivo principal de empleados (por defecto `empleados.csv`).
-- `todolist.empleados.backup.csv` – Copia de seguridad de empleados (por defecto `empleados_backup.csv`).
-- `todolist.historial.log` – Registro de operaciones.
-
-Ejemplo:
-
-```bash
-mvn exec:java \
-  -Dexec.mainClass="src.Main" \
-  -Dtodolist.db.url="jdbc:sqlite:/ruta/personalizada/todolist.db" \
-  -Dtodolist.tareas.csv="/ruta/tareas.csv"
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\ejecutar.ps1 -DbPath "C:\ruta\mis-datos.db"
 ```
+
+Internamente se traduce en la propiedad `-Dtodolist.db.url=jdbc:sqlite:C:\ruta\mis-datos.db`. Si quieres ajustar otras rutas (`todolist.tareas.csv`, `todolist.empleados.csv`, etc.) puedes ejecutar manualmente la aplicación con `java` e incluir las propiedades deseadas.
 
 ## Scripts SQL incluidos
 
@@ -88,13 +92,13 @@ sqlite3 data/todolist.db < src/main/resources/sql/seed.sql
 
 # Ejecución de Pruebas
 
-El proyecto incluye pruebas unitarias para la lógica principal de tareas y empleados. Para ejecutarlas:
+El proyecto trae un runner de pruebas sin dependencias externas (`src/test/java/src/controller/GestorTareasTest.java`) que valida los casos más importantes de tareas y empleados usando archivos temporales y una base SQLite aislada.
 
-```bash
-mvn test
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\probar.ps1
 ```
 
-Durante las pruebas se utilizan rutas temporales y una base de datos aislada para no modificar los datos reales.
+Si alguna validación falla, el script devolverá un código distinto de cero y mostrará el error en consola.
 
 # Estructura del Proyecto
 
