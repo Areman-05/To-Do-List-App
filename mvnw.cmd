@@ -1,7 +1,9 @@
 @ECHO OFF
 SETLOCAL
 
-SET WRAPPER_DIR=%~dp0.mvn\wrapper
+SET BASE_DIR=%~dp0
+IF "%BASE_DIR:~-1%"=="\" SET BASE_DIR=%BASE_DIR:~0,-1%
+SET WRAPPER_DIR=%BASE_DIR%\.mvn\wrapper
 SET WRAPPER_JAR=%WRAPPER_DIR%\maven-wrapper.jar
 SET WRAPPER_PROPERTIES=%WRAPPER_DIR%\maven-wrapper.properties
 
@@ -23,6 +25,6 @@ IF ERRORLEVEL 1 (
 )
 
 :execute
-"%JAVA_EXE%" -classpath "%WRAPPER_JAR%" org.apache.maven.wrapper.MavenWrapperMain %*
+"%JAVA_EXE%" -Dmaven.multiModuleProjectDirectory="%BASE_DIR%" -classpath "%WRAPPER_JAR%" org.apache.maven.wrapper.MavenWrapperMain %*
 ENDLOCAL
 

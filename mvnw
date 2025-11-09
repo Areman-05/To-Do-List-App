@@ -20,7 +20,8 @@
 
 set -e
 
-WRAPPER_DIR="$(dirname "$0")/.mvn/wrapper"
+BASE_DIR="$(cd "$(dirname "$0")" && pwd -P)"
+WRAPPER_DIR="$BASE_DIR/.mvn/wrapper"
 WRAPPER_JAR="$WRAPPER_DIR/maven-wrapper.jar"
 WRAPPER_PROPERTIES="$WRAPPER_DIR/maven-wrapper.properties"
 
@@ -46,5 +47,5 @@ if [ -z "$JAVA_EXE" ]; then
   exit 1
 fi
 
-exec "$JAVA_EXE" -classpath "$WRAPPER_JAR" org.apache.maven.wrapper.MavenWrapperMain "$@"
+exec "$JAVA_EXE" -Dmaven.multiModuleProjectDirectory="$BASE_DIR" -classpath "$WRAPPER_JAR" org.apache.maven.wrapper.MavenWrapperMain "$@"
 
