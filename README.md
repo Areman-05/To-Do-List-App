@@ -20,10 +20,65 @@ Este proyecto es ideal para mejorar la productividad y el seguimiento de activid
 
 # Tecnologías Utilizadas
 
-- Lenguaje de programación: Java.
-- Persistencia: Lectura y escritura de archivos de texto usando clases de entrada/salida (BufferedReader, BufferedWriter).
+- Lenguaje de programación: Java 17.
+- Gestión de dependencias y construcción: Maven.
+- Persistencia híbrida: SQLite (principal) con respaldo automático en archivos CSV.
+- Testing: JUnit 5.
 - Estructuras de datos: Uso de listas dinámicas con ArrayList para gestionar tareas y empleados.
 - Interacción con el usuario: Consola con Scanner y menús claros y estructurados.
+
+# Configuración del Proyecto
+
+## Requisitos previos
+
+- Java 17 o superior instalado y disponible en el `PATH`.
+- Maven 3.9 o superior.
+
+## Ejecución
+
+1. Instala las dependencias y compila el proyecto:
+
+   ```bash
+   mvn clean package
+   ```
+
+2. Ejecuta la aplicación:
+
+   ```bash
+   mvn exec:java -Dexec.mainClass="src.Main"
+   ```
+
+   > El primer arranque creará la base de datos SQLite en `data/todolist.db` junto con los archivos CSV (`tareas.csv`, `empleados.csv`) y el historial (`historial.log`).
+
+## Personalización de rutas
+
+Para entornos de prueba o despliegues personalizados, puedes redefinir las rutas mediante propiedades del sistema al iniciar la JVM:
+
+- `todolist.db.url` – Ruta JDBC de la base de datos (por defecto `jdbc:sqlite:data/todolist.db`).
+- `todolist.tareas.csv` – Archivo principal de tareas (por defecto `tareas.csv`).
+- `todolist.tareas.backup.csv` – Copia de seguridad de tareas (por defecto `tareas_backup.csv`).
+- `todolist.empleados.csv` – Archivo principal de empleados (por defecto `empleados.csv`).
+- `todolist.empleados.backup.csv` – Copia de seguridad de empleados (por defecto `empleados_backup.csv`).
+- `todolist.historial.log` – Registro de operaciones.
+
+Ejemplo:
+
+```bash
+mvn exec:java \
+  -Dexec.mainClass="src.Main" \
+  -Dtodolist.db.url="jdbc:sqlite:/ruta/personalizada/todolist.db" \
+  -Dtodolist.tareas.csv="/ruta/tareas.csv"
+```
+
+# Ejecución de Pruebas
+
+El proyecto incluye pruebas unitarias para la lógica principal de tareas y empleados. Para ejecutarlas:
+
+```bash
+mvn test
+```
+
+Durante las pruebas se utilizan rutas temporales y una base de datos aislada para no modificar los datos reales.
 
 # Estructura del Proyecto
 
