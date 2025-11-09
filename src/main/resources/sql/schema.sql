@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS tareas (
+    id INTEGER PRIMARY KEY,
+    titulo TEXT NOT NULL,
+    descripcion TEXT,
+    completada INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS empleados (
+    id INTEGER PRIMARY KEY,
+    rol TEXT NOT NULL
+);
+
