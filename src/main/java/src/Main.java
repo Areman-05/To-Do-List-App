@@ -28,7 +28,9 @@ public class Main {
                 idEmpleado = scanner.nextInt();
                 scanner.nextLine();
                 if (gestorEmpleados.verificarEmpleado(idEmpleado)) {
-                    System.out.println("Acceso concedido. Bienvenido, empleado " + idEmpleado);
+                    var empleado = gestorEmpleados.obtenerEmpleado(idEmpleado);
+                    String rolMensaje = empleado != null ? " (rol: " + empleado.getRol() + ")" : "";
+                    System.out.println("Acceso concedido. Bienvenido, empleado " + idEmpleado + rolMensaje);
                     break;
                 } else {
                     System.out.println("ID no registrado. Intente nuevamente.");
@@ -41,7 +43,7 @@ public class Main {
                 String rolInput = scanner.nextLine().toLowerCase();
                 if (!rolInput.equals("admin") && !rolInput.equals("empleado")) {
                     System.out.println("Rol inválido. Use 'admin' o 'empleado'.");
-                    break;
+                    continue;
                 }
                 if (gestorEmpleados.registrarEmpleado(nuevoId, rolInput)) {
                     System.out.println("Empleado registrado exitosamente como " + rolInput + ". Ahora puede iniciar sesión.");
@@ -242,7 +244,7 @@ public class Main {
                             } while (subOpcionEstado != 3);
                         }
                     } while (subOpcionEditar != 4);
-
+                    break;
                 case 4:
                     System.out.println("\n=== LISTA DE TAREAS ===");
                     System.out.println("1. Listar todas");

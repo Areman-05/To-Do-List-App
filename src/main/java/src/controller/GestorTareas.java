@@ -166,4 +166,8 @@ public class GestorTareas {
             System.out.println("No se encontraron tareas con esa palabra clave.");
         }
     }
+
+    public List<Tarea> obtenerTareas() {
+        return List.copyOf(tareas);
+    }
 }

@@ -9,8 +9,8 @@ public class Tarea {
     // Constructor
     public Tarea(int id, String titulo, String descripcion) {
         this.id = id;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
+        this.titulo = titulo != null ? titulo : "";
+        this.descripcion = descripcion != null ? descripcion : "";
         this.completada = false;
     }
 
@@ -24,14 +24,14 @@ public class Tarea {
     }
 
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        this.titulo = titulo != null ? titulo : this.titulo;
     }
     public String getDescripcion() {
         return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion = descripcion != null ? descripcion : this.descripcion;
     }
 
     public boolean isCompletada() {
