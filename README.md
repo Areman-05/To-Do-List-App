@@ -70,6 +70,22 @@ mvn exec:java \
   -Dtodolist.tareas.csv="/ruta/tareas.csv"
 ```
 
+## Scripts SQL incluidos
+
+El proyecto incorpora scripts sencillos dentro de `src/main/resources/sql/`:
+
+- `schema.sql`: define la estructura de tablas para `tareas` y `empleados`.
+- `seed.sql`: inserta un empleado y una tarea de ejemplo usando `INSERT OR IGNORE`.
+
+Estos scripts se ejecutan automáticamente al iniciar la aplicación, pero puedes utilizarlos por separado si deseas crear o inspeccionar la base de datos manualmente:
+
+```bash
+sqlite3 data/todolist.db < src/main/resources/sql/schema.sql
+sqlite3 data/todolist.db < src/main/resources/sql/seed.sql
+```
+
+> Si prefieres no cargar datos iniciales, elimina o vacía `seed.sql`; el gestor seguirá funcionando porque todos los scripts se ejecutan de forma opcional.
+
 # Ejecución de Pruebas
 
 El proyecto incluye pruebas unitarias para la lógica principal de tareas y empleados. Para ejecutarlas:
