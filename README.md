@@ -21,10 +21,10 @@ Este proyecto es ideal para mejorar la productividad y el seguimiento de activid
 # Tecnologías Utilizadas
 
 - Lenguaje de programación: Java 17.
+- Interfaz gráfica: JavaFX 17 para una experiencia visual moderna.
 - Persistencia híbrida: SQLite (principal) con respaldo automático en archivos CSV.
 - Scripts de apoyo: PowerShell sencillo (`scripts/*.ps1`) para compilar, probar y ejecutar sin herramientas externas.
 - Estructuras de datos: Uso de listas dinámicas con ArrayList para gestionar tareas y empleados.
-- Interacción con el usuario: Consola con Scanner y menús claros y estructurados.
 
 # Configuración del Proyecto
 
