@@ -120,8 +120,19 @@ src/controller: Contiene las clases de lógica de negocio:
 - Empleado: Representa un empleado.
 - GestorEmpleados: Gestiona el registro y verificación de empleados.
   
-src/persistence: Incluye las clases encargadas de guardar y cargar datos desde archivos de texto:
+src/persistence: Incluye las clases encargadas de guardar y cargar datos:
+- DatabaseManager: Gestiona la conexión a la base de datos SQLite.
 - GestorPersistencia: Gestiona la persistencia de las tareas.
 - GestorPersistenciaEmpleados: Gestiona la persistencia de los empleados.
-  
-src/Main.java: Contiene el punto de entrada de la aplicación, donde se gestiona la interacción completa con el usuario a través de menús y submenús.
+
+src/view: Contiene las clases de la interfaz gráfica JavaFX:
+- ToDoListApp: Punto de entrada de la aplicación JavaFX.
+- LoginView/LoginController: Pantalla y lógica de inicio de sesión.
+- RegistroView/RegistroController: Pantalla y lógica de registro.
+- MainView/MainController: Vista principal del gestor de tareas.
+- AgregarTareaDialog, EditarTareaDialog, EliminarTareaDialog: Diálogos para gestión de tareas.
+- BuscarTareaDialog, MarcarCompletadaDialog: Diálogos adicionales.
+- TareasListView: Vista para listar todas las tareas.
+
+src/main/resources/styles: Archivos CSS para el estilo de la interfaz.
+src/main/resources/sql: Scripts SQL para inicializar la base de datos.
