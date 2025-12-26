@@ -19,6 +19,7 @@ public class MainView {
     private Button eliminarButton;
     private Button listarButton;
     private Button buscarButton;
+    private Button marcarEstadoButton;
     private VBox centerContent;
     
     public MainView(Stage primaryStage) {
@@ -60,7 +61,11 @@ public class MainView {
         buscarButton.setPrefWidth(150);
         buscarButton.setPrefHeight(35);
         
-        buttonBar.getChildren().addAll(agregarButton, editarButton, eliminarButton, listarButton, buscarButton);
+        marcarEstadoButton = new Button("Cambiar Estado");
+        marcarEstadoButton.setPrefWidth(150);
+        marcarEstadoButton.setPrefHeight(35);
+        
+        buttonBar.getChildren().addAll(agregarButton, editarButton, eliminarButton, listarButton, buscarButton, marcarEstadoButton);
         
         centerContent = new VBox(10);
         centerContent.setPadding(new Insets(20));
@@ -98,6 +103,10 @@ public class MainView {
     
     public Button getBuscarButton() {
         return buscarButton;
+    }
+    
+    public Button getMarcarEstadoButton() {
+        return marcarEstadoButton;
     }
     
     public VBox getCenterContent() {

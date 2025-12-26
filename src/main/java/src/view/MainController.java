@@ -30,6 +30,7 @@ public class MainController {
         mainView.getEliminarButton().setOnAction(e -> showEliminarTareaDialog());
         mainView.getListarButton().setOnAction(e -> mostrarTareas());
         mainView.getBuscarButton().setOnAction(e -> showBuscarTareaDialog());
+        mainView.getMarcarEstadoButton().setOnAction(e -> showMarcarEstadoDialog());
     }
     
     private void showAgregarTareaDialog() {
@@ -54,6 +55,11 @@ public class MainController {
     
     private void showBuscarTareaDialog() {
         BuscarTareaDialog dialog = new BuscarTareaDialog(mainView.getStage(), gestorTareas);
+        dialog.show();
+    }
+    
+    private void showMarcarEstadoDialog() {
+        MarcarCompletadaDialog dialog = new MarcarCompletadaDialog(mainView.getStage(), gestorTareas);
         dialog.show();
     }
     
