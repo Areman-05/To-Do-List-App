@@ -22,6 +22,11 @@ public class MainController {
             welcomeMsg += " (rol: " + empleado.getRol() + ")";
         }
         mainView.setWelcomeMessage(welcomeMsg);
+        actualizarListaTareas();
+    }
+    
+    private void actualizarListaTareas() {
+        mainView.actualizarListaTareas(gestorTareas.obtenerTareas());
     }
     
     private void setupHandlers() {
@@ -36,16 +41,19 @@ public class MainController {
     private void showAgregarTareaDialog() {
         AgregarTareaDialog dialog = new AgregarTareaDialog(mainView.getStage());
         dialog.show();
+        actualizarListaTareas();
     }
     
     private void showEditarTareaDialog() {
         EditarTareaDialog dialog = new EditarTareaDialog(mainView.getStage(), gestorTareas);
         dialog.show();
+        actualizarListaTareas();
     }
     
     private void showEliminarTareaDialog() {
         EliminarTareaDialog dialog = new EliminarTareaDialog(mainView.getStage(), gestorTareas);
         dialog.show();
+        actualizarListaTareas();
     }
     
     private void mostrarTareas() {
@@ -61,6 +69,7 @@ public class MainController {
     private void showMarcarEstadoDialog() {
         MarcarCompletadaDialog dialog = new MarcarCompletadaDialog(mainView.getStage(), gestorTareas);
         dialog.show();
+        actualizarListaTareas();
     }
     
     public GestorTareas getGestorTareas() {

@@ -1,15 +1,20 @@
 package src.view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import src.controller.Empleado;
+import src.controller.GestorTareas;
+import src.controller.Tarea;
 
 public class MainView {
     private Stage stage;
@@ -71,9 +76,12 @@ public class MainView {
         centerContent.setPadding(new Insets(20));
         centerContent.setAlignment(Pos.TOP_CENTER);
         
+        BorderPane contentPane = new BorderPane();
+        contentPane.setTop(buttonBar);
+        contentPane.setCenter(centerContent);
+        
         root.setTop(topBar);
-        root.setCenter(buttonBar);
-        root.setBottom(centerContent);
+        root.setCenter(contentPane);
         
         Scene scene = new Scene(root, 900, 600);
         scene.getStylesheets().add(getClass().getResource("/styles/estilos.css").toExternalForm());
@@ -111,6 +119,34 @@ public class MainView {
     
     public VBox getCenterContent() {
         return centerContent;
+    }
+    
+    public void actualizarListaTareas(java.util.List<Tarea> tareas) {
+        centerContent.getChildren().clear();
+        
+        Label tituloLabel = new Label("Mis Tareas");
+        tituloLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+        centerContent.getChildren().add(tituloLabel);
+        
+        ListView<String> lista = new ListView<>();
+        ObservableList<String> items = FXCollections.observableArrayList();
+        
+        if (tareas.isEmpty()) {
+            items.add("No hay tareas disponibles. Use 'Agregar Tarea' para crear una.");
+        } else {
+            for (Tarea tarea : tareas) {
+                String estado = tarea.isCompletada() ? "✔ Completada" : "✘ Pendiente";
+                String texto = String.format("ID: %d | %s | %s", tarea.getId(), estado, tarea.getTitulo());
+                if (!tarea.getDescripcion().isEmpty()) {
+                    texto += " | " + tarea.getDescripcion();
+                }
+                items.add(texto);
+            }
+        }
+        
+        lista.setItems(items);
+        lista.setPrefHeight(400);
+        centerContent.getChildren().add(lista);
     }
     
     public Stage getStage() {
