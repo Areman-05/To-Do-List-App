@@ -7,11 +7,8 @@ public class ToDoListApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        primaryStage.setTitle("To-Do List App");
-        primaryStage.setWidth(800);
-        primaryStage.setHeight(600);
-        primaryStage.setMinWidth(600);
-        primaryStage.setMinHeight(400);
+        LoginView loginView = new LoginView(primaryStage);
+        LoginController loginController = new LoginController(loginView);
         primaryStage.show();
     }
 

@@ -50,6 +50,7 @@ public class Tarea {
     // Sobrescribir toString() para mostrar la tarea en texto
     @Override
     public String toString() {
-        return "src.controller.Tarea[ID=" + id + ", Titulo='" + titulo + "', Descripcion='" + descripcion + "', Completada=" + (completada ? "✔" : "✘") + "]";
+        String estado = completada ? "✔ Completada" : "✘ Pendiente";
+        return String.format("ID: %d - %s (%s)", id, titulo, estado);
     }
 }
