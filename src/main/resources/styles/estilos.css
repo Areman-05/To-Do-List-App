@@ -1,6 +1,7 @@
 .root {
     -fx-font-family: "Segoe UI", Arial, sans-serif;
     -fx-font-size: 14px;
+    -fx-background-color: #f8f9fa;
 }
 
 .button {
@@ -8,27 +9,44 @@
     -fx-text-fill: white;
     -fx-background-radius: 5px;
     -fx-cursor: hand;
+    -fx-padding: 8px 16px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 2, 0, 0, 1);
 }
 
 .button:hover {
     -fx-background-color: #0056b3;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 3, 0, 0, 2);
 }
 
 .button:pressed {
     -fx-background-color: #004085;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 1, 0, 0, 0);
 }
 
 .text-field, .text-area, .combo-box {
     -fx-background-radius: 5px;
     -fx-border-color: #ced4da;
     -fx-border-radius: 5px;
+    -fx-background-color: white;
+    -fx-padding: 8px;
 }
 
 .text-field:focused, .text-area:focused {
+    -fx-border-color: #007bff;
+    -fx-border-width: 2px;
+}
+
+.combo-box:focused {
     -fx-border-color: #007bff;
 }
 
 .label {
     -fx-text-fill: #212529;
+}
+
+.list-view {
+    -fx-background-color: white;
+    -fx-border-color: #dee2e6;
+    -fx-border-radius: 5px;
 }
 
