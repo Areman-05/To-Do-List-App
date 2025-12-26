@@ -100,6 +100,16 @@ powershell -ExecutionPolicy Bypass -File scripts\probar.ps1
 
 Si alguna validación falla, el script devolverá un código distinto de cero y mostrará el error en consola.
 
+# Interfaz Gráfica
+
+La aplicación utiliza JavaFX 17 para proporcionar una interfaz gráfica moderna e intuitiva. Las características principales incluyen:
+
+- **Pantalla de Login**: Inicio de sesión y registro de empleados
+- **Vista Principal**: Panel de control con acceso a todas las funcionalidades
+- **Gestión de Tareas**: Diálogos para agregar, editar, eliminar y buscar tareas
+- **Lista Visual**: Visualización en tiempo real de todas las tareas con su estado
+- **Cambio de Estado**: Marcar tareas como completadas o pendientes fácilmente
+
 # Estructura del Proyecto
 
 El proyecto está organizado en distintas carpetas para una mayor claridad y mantenibilidad del código:
