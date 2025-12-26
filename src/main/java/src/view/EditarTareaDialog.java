@@ -68,6 +68,7 @@ public class EditarTareaDialog {
         cancelarButton.setOnAction(e -> stage.close());
         
         Scene scene = new Scene(root, 450, 450);
+        scene.getStylesheets().add(getClass().getResource("/styles/estilos.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Editar Tarea");
         stage.setResizable(false);

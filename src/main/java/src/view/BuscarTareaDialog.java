@@ -63,6 +63,7 @@ public class BuscarTareaDialog {
         buscarField.setOnAction(e -> realizarBusqueda());
         
         Scene scene = new Scene(root, 550, 450);
+        scene.getStylesheets().add(getClass().getResource("/styles/estilos.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Buscar Tareas");
         stage.setResizable(false);

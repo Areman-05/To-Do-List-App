@@ -53,6 +53,7 @@ public class RegistroView {
         root.getChildren().addAll(titleLabel, idLabel, idField, rolLabel, rolCombo, registrarButton, volverButton);
         
         Scene scene = new Scene(root, 400, 350);
+        scene.getStylesheets().add(getClass().getResource("/styles/estilos.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Registro - To-Do List App");
         stage.setResizable(false);

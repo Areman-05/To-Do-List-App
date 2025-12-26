@@ -40,6 +40,7 @@ public class TareasListView {
         root.setCenter(tareasList);
         
         Scene scene = new Scene(root, 600, 500);
+        scene.getStylesheets().add(getClass().getResource("/styles/estilos.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Lista de Tareas");
     }

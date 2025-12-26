@@ -61,6 +61,7 @@ public class MarcarCompletadaDialog {
         cancelarButton.setOnAction(e -> stage.close());
         
         Scene scene = new Scene(root, 450, 280);
+        scene.getStylesheets().add(getClass().getResource("/styles/estilos.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Cambiar Estado de Tarea");
         stage.setResizable(false);

@@ -55,6 +55,7 @@ public class EliminarTareaDialog {
         cancelarButton.setOnAction(e -> stage.close());
         
         Scene scene = new Scene(root, 450, 250);
+        scene.getStylesheets().add(getClass().getResource("/styles/estilos.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Eliminar Tarea");
         stage.setResizable(false);
