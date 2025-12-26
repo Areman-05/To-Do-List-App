@@ -1,5 +1,5 @@
 param(
-    [string] $DbPath
+    [string] $DbPath = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -19,22 +19,31 @@ function Get-JavaTool([string] $tool) {
 }
 
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
+$libDir = Join-Path $repoRoot "lib"
+$sqliteJar = Join-Path $libDir "sqlite-jdbc.jar"
+$javafxBase = Join-Path $libDir "javafx-base.jar"
+$javafxControls = Join-Path $libDir "javafx-controls.jar"
+$javafxGraphics = Join-Path $libDir "javafx-graphics.jar"
+$javafxFxml = Join-Path $libDir "javafx-fxml.jar"
+
+$classpath = "$sqliteJar;$javafxBase;$javafxControls;$javafxGraphics;$javafxFxml"
+
 $salida = Join-Path $repoRoot "out"
-$libPath = Join-Path $repoRoot "lib\sqlite-jdbc.jar"
 $javaExe = Get-JavaTool "java"
 
 if (-not (Test-Path $salida)) {
     & (Join-Path $PSScriptRoot "compilar.ps1")
 }
 
-$javaArgs = @("-cp", "$salida;$libPath")
-
+$props = @()
 if ($DbPath) {
-    $propiedad = "-Dtodolist.db.url=jdbc:sqlite:$DbPath"
-    $javaArgs = @($propiedad) + $javaArgs
+    $props += "-Dtodolist.db.url=jdbc:sqlite:$DbPath"
 }
 
-$javaArgs += "src.Main"
+$javaArgs = @(
+    "--module-path", "$javafxBase;$javafxControls;$javafxGraphics;$javafxFxml",
+    "--add-modules", "javafx.controls,javafx.fxml",
+    "-cp", "$classpath;$salida"
+) + $props + @("src.view.ToDoListApp")
 
-& $javaExe @javaArgs
-
+& $javaExe $javaArgs

@@ -19,15 +19,26 @@ function Get-JavaTool([string] $tool) {
 }
 
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
-$libPath = Join-Path $repoRoot "lib\sqlite-jdbc.jar"
+$libDir = Join-Path $repoRoot "lib"
+$sqliteJar = Join-Path $libDir "sqlite-jdbc.jar"
+$javafxBase = Join-Path $libDir "javafx-base.jar"
+$javafxControls = Join-Path $libDir "javafx-controls.jar"
+$javafxGraphics = Join-Path $libDir "javafx-graphics.jar"
+$javafxFxml = Join-Path $libDir "javafx-fxml.jar"
+
+$libPath = "$sqliteJar;$javafxBase;$javafxControls;$javafxGraphics;$javafxFxml"
+
 $fuentePrincipal = Join-Path $repoRoot "src\main\java"
 $recursos = Join-Path $repoRoot "src\main\resources"
 $fuenteTests = Join-Path $repoRoot "src\test\java"
 $salida = Join-Path $repoRoot "out"
 $javacExe = Get-JavaTool "javac"
 
-if (-not (Test-Path $libPath)) {
-    throw "No se encontró $libPath. Descarga sqlite-jdbc y colócalo en la carpeta lib."
+if (-not (Test-Path $sqliteJar)) {
+    throw "No se encontró $sqliteJar. Descarga sqlite-jdbc y colócalo en la carpeta lib."
+}
+if (-not (Test-Path $javafxBase)) {
+    throw "No se encontró $javafxBase. Descarga los módulos de JavaFX y colócalos en la carpeta lib."
 }
 
 if (Test-Path $salida) {
