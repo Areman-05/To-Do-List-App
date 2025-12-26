@@ -2,4 +2,11 @@ target/
 .idea/
 data/
 out/
+*.class
+.classpath
+.project
+.settings/
+*.log
+*.db
+*.db-journal
 
