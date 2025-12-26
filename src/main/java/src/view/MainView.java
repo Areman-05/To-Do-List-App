@@ -71,6 +71,7 @@ public class MainView {
         root.setBottom(centerContent);
         
         Scene scene = new Scene(root, 900, 600);
+        scene.getStylesheets().add(getClass().getResource("/styles/estilos.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Gestor de Tareas - To-Do List App");
     }

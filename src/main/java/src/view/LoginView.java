@@ -45,6 +45,7 @@ public class LoginView {
         root.getChildren().addAll(titleLabel, idLabel, idField, loginButton, registerButton);
         
         Scene scene = new Scene(root, 400, 300);
+        scene.getStylesheets().add(getClass().getResource("/styles/estilos.css").toExternalForm());
         stage.setScene(scene);
         stage.setTitle("Login - To-Do List App");
         stage.setResizable(false);
