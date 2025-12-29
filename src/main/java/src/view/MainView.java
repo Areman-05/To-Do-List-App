@@ -49,26 +49,32 @@ public class MainView {
         agregarButton = new Button("Agregar Tarea");
         agregarButton.setPrefWidth(150);
         agregarButton.setPrefHeight(35);
+        agregarButton.setTooltip(new javafx.scene.control.Tooltip("Crear una nueva tarea"));
         
         editarButton = new Button("Editar Tarea");
         editarButton.setPrefWidth(150);
         editarButton.setPrefHeight(35);
+        editarButton.setTooltip(new javafx.scene.control.Tooltip("Modificar una tarea existente"));
         
         eliminarButton = new Button("Eliminar Tarea");
         eliminarButton.setPrefWidth(150);
         eliminarButton.setPrefHeight(35);
+        eliminarButton.setTooltip(new javafx.scene.control.Tooltip("Eliminar una tarea permanentemente"));
         
         listarButton = new Button("Listar Tareas");
         listarButton.setPrefWidth(150);
         listarButton.setPrefHeight(35);
+        listarButton.setTooltip(new javafx.scene.control.Tooltip("Ver todas las tareas en una ventana separada"));
         
         buscarButton = new Button("Buscar Tareas");
         buscarButton.setPrefWidth(150);
         buscarButton.setPrefHeight(35);
+        buscarButton.setTooltip(new javafx.scene.control.Tooltip("Buscar tareas por palabra clave"));
         
         marcarEstadoButton = new Button("Cambiar Estado");
         marcarEstadoButton.setPrefWidth(150);
         marcarEstadoButton.setPrefHeight(35);
+        marcarEstadoButton.setTooltip(new javafx.scene.control.Tooltip("Marcar tareas como completadas o pendientes"));
         
         buttonBar.getChildren().addAll(agregarButton, editarButton, eliminarButton, listarButton, buscarButton, marcarEstadoButton);
         
