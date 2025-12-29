@@ -25,20 +25,32 @@ public class RegistroController {
             String idText = registroView.getIdField().getText().trim();
             if (idText.isEmpty()) {
                 showAlert("Error", "Por favor ingrese un ID", Alert.AlertType.ERROR);
+                registroView.getIdField().requestFocus();
                 return;
             }
             
             int id = Integer.parseInt(idText);
+            if (id <= 0) {
+                showAlert("Error", "El ID debe ser un número positivo", Alert.AlertType.ERROR);
+                registroView.getIdField().selectAll();
+                registroView.getIdField().requestFocus();
+                return;
+            }
+            
             String rol = registroView.getRolCombo().getValue();
             
             if (gestorEmpleados.registrarEmpleado(id, rol)) {
-                showAlert("Éxito", "Empleado registrado exitosamente como " + rol, Alert.AlertType.INFORMATION);
+                showAlert("Éxito", "Empleado registrado exitosamente como " + rol + ". Ahora puede iniciar sesión.", Alert.AlertType.INFORMATION);
                 registroView.close();
             } else {
                 showAlert("Error", "Ese ID ya está registrado. Intente con otro.", Alert.AlertType.ERROR);
+                registroView.getIdField().selectAll();
+                registroView.getIdField().requestFocus();
             }
         } catch (NumberFormatException e) {
             showAlert("Error", "El ID debe ser un número válido", Alert.AlertType.ERROR);
+            registroView.getIdField().selectAll();
+            registroView.getIdField().requestFocus();
         }
     }
     

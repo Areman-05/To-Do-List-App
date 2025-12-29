@@ -25,18 +25,29 @@ public class LoginController {
             String idText = loginView.getIdField().getText().trim();
             if (idText.isEmpty()) {
                 showAlert("Error", "Por favor ingrese un ID", Alert.AlertType.ERROR);
+                loginView.getIdField().requestFocus();
                 return;
             }
             
             int id = Integer.parseInt(idText);
+            if (id <= 0) {
+                showAlert("Error", "El ID debe ser un número positivo", Alert.AlertType.ERROR);
+                loginView.getIdField().requestFocus();
+                return;
+            }
+            
             if (gestorEmpleados.verificarEmpleado(id)) {
                 Empleado empleado = gestorEmpleados.obtenerEmpleado(id);
                 showMainView(empleado);
             } else {
                 showAlert("Error", "ID no registrado. Por favor regístrese primero.", Alert.AlertType.ERROR);
+                loginView.getIdField().selectAll();
+                loginView.getIdField().requestFocus();
             }
         } catch (NumberFormatException e) {
             showAlert("Error", "El ID debe ser un número válido", Alert.AlertType.ERROR);
+            loginView.getIdField().selectAll();
+            loginView.getIdField().requestFocus();
         }
     }
     
