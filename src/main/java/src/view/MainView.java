@@ -25,6 +25,7 @@ public class MainView {
     private Button listarButton;
     private Button buscarButton;
     private Button marcarEstadoButton;
+    private Button actualizarButton;
     private VBox centerContent;
     private Label estadisticasLabel;
     
@@ -79,7 +80,13 @@ public class MainView {
         marcarEstadoButton.setPrefHeight(35);
         marcarEstadoButton.setTooltip(new javafx.scene.control.Tooltip("Marcar tareas como completadas o pendientes"));
         
-        buttonBar.getChildren().addAll(agregarButton, editarButton, eliminarButton, listarButton, buscarButton, marcarEstadoButton);
+        actualizarButton = new Button("Actualizar");
+        actualizarButton.setPrefWidth(120);
+        actualizarButton.setPrefHeight(35);
+        actualizarButton.setTooltip(new javafx.scene.control.Tooltip("Refrescar la lista de tareas"));
+        actualizarButton.setStyle("-fx-background-color: #28a745; -fx-text-fill: white;");
+        
+        buttonBar.getChildren().addAll(agregarButton, editarButton, eliminarButton, listarButton, buscarButton, marcarEstadoButton, actualizarButton);
         
         centerContent = new VBox(10);
         centerContent.setPadding(new Insets(20));
@@ -128,6 +135,10 @@ public class MainView {
     
     public Button getMarcarEstadoButton() {
         return marcarEstadoButton;
+    }
+    
+    public Button getActualizarButton() {
+        return actualizarButton;
     }
     
     public VBox getCenterContent() {

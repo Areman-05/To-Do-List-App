@@ -36,6 +36,7 @@ public class MainController {
         mainView.getListarButton().setOnAction(e -> mostrarTareas());
         mainView.getBuscarButton().setOnAction(e -> showBuscarTareaDialog());
         mainView.getMarcarEstadoButton().setOnAction(e -> showMarcarEstadoDialog());
+        mainView.getActualizarButton().setOnAction(e -> actualizarListaTareas());
     }
     
     private void showAgregarTareaDialog() {
