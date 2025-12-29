@@ -37,10 +37,13 @@ public class LoginView {
         loginButton = new Button("Iniciar Sesión");
         loginButton.setPrefWidth(250);
         loginButton.setStyle("-fx-font-size: 14px;");
+        loginButton.setDefaultButton(true);
         
         registerButton = new Button("Registrarse");
         registerButton.setPrefWidth(250);
         registerButton.setStyle("-fx-font-size: 14px;");
+        
+        idField.setOnAction(e -> loginButton.fire());
         
         root.getChildren().addAll(titleLabel, idLabel, idField, loginButton, registerButton);
         

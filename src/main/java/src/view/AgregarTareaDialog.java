@@ -51,6 +51,7 @@ public class AgregarTareaDialog {
         
         agregarButton = new Button("Agregar");
         agregarButton.setPrefWidth(150);
+        agregarButton.setDefaultButton(true);
         
         cancelarButton = new Button("Cancelar");
         cancelarButton.setPrefWidth(150);
@@ -59,6 +60,7 @@ public class AgregarTareaDialog {
         
         agregarButton.setOnAction(e -> handleAgregar());
         cancelarButton.setOnAction(e -> stage.close());
+        tituloField.setOnAction(e -> agregarButton.fire());
         
         Scene scene = new Scene(root, 450, 350);
         scene.getStylesheets().add(getClass().getResource("/styles/estilos.css").toExternalForm());

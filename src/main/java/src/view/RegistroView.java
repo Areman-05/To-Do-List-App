@@ -45,10 +45,13 @@ public class RegistroView {
         registrarButton = new Button("Registrarse");
         registrarButton.setPrefWidth(250);
         registrarButton.setStyle("-fx-font-size: 14px;");
+        registrarButton.setDefaultButton(true);
         
         volverButton = new Button("Volver");
         volverButton.setPrefWidth(250);
         volverButton.setStyle("-fx-font-size: 14px;");
+        
+        idField.setOnAction(e -> registrarButton.fire());
         
         root.getChildren().addAll(titleLabel, idLabel, idField, rolLabel, rolCombo, registrarButton, volverButton);
         
