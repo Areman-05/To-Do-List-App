@@ -76,10 +76,11 @@ public class EliminarTareaDialog {
         
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
         confirmAlert.setTitle("Confirmar eliminación");
-        confirmAlert.setHeaderText(null);
-        confirmAlert.setContentText("¿Está seguro de que desea eliminar la tarea: " + tarea.getTitulo() + "?");
+        confirmAlert.setHeaderText("¿Eliminar esta tarea?");
+        confirmAlert.setContentText("Tarea: " + tarea.getTitulo() + "\n\nEsta acción no se puede deshacer.");
         
-        if (confirmAlert.showAndWait().get().getButtonData().isDefaultButton()) {
+        java.util.Optional<javafx.scene.control.ButtonType> result = confirmAlert.showAndWait();
+        if (result.isPresent() && result.get() == javafx.scene.control.ButtonType.OK) {
             gestorTareas.eliminarTarea(tarea.getId());
             showAlert("Éxito", "Tarea eliminada correctamente.", Alert.AlertType.INFORMATION);
             stage.close();
