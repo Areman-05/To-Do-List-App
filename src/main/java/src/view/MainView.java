@@ -26,6 +26,7 @@ public class MainView {
     private Button buscarButton;
     private Button marcarEstadoButton;
     private VBox centerContent;
+    private Label estadisticasLabel;
     
     public MainView(Stage primaryStage) {
         this.stage = primaryStage;
@@ -35,12 +36,14 @@ public class MainView {
     private void createView() {
         BorderPane root = new BorderPane();
         
-        HBox topBar = new HBox(10);
+        HBox topBar = new HBox(15);
         topBar.setPadding(new Insets(15));
         topBar.setAlignment(Pos.CENTER_LEFT);
         welcomeLabel = new Label("Bienvenido");
         welcomeLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-        topBar.getChildren().add(welcomeLabel);
+        estadisticasLabel = new Label("");
+        estadisticasLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #6c757d;");
+        topBar.getChildren().addAll(welcomeLabel, estadisticasLabel);
         
         HBox buttonBar = new HBox(10);
         buttonBar.setPadding(new Insets(15));
@@ -99,6 +102,10 @@ public class MainView {
         welcomeLabel.setText(message);
     }
     
+    public void actualizarEstadisticas(int total, int completadas, int pendientes) {
+        estadisticasLabel.setText(String.format("| Total: %d | Completadas: %d | Pendientes: %d", total, completadas, pendientes));
+    }
+    
     public Button getAgregarButton() {
         return agregarButton;
     }
@@ -129,6 +136,12 @@ public class MainView {
     
     public void actualizarListaTareas(java.util.List<Tarea> tareas) {
         centerContent.getChildren().clear();
+        
+        int total = tareas.size();
+        long completadas = tareas.stream().filter(Tarea::isCompletada).count();
+        long pendientes = total - completadas;
+        
+        actualizarEstadisticas(total, (int)completadas, (int)pendientes);
         
         Label tituloLabel = new Label("Mis Tareas");
         tituloLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
