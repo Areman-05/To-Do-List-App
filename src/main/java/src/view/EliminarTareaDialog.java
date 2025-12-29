@@ -81,9 +81,13 @@ public class EliminarTareaDialog {
         
         java.util.Optional<javafx.scene.control.ButtonType> result = confirmAlert.showAndWait();
         if (result.isPresent() && result.get() == javafx.scene.control.ButtonType.OK) {
-            gestorTareas.eliminarTarea(tarea.getId());
-            showAlert("Éxito", "Tarea eliminada correctamente.", Alert.AlertType.INFORMATION);
-            stage.close();
+            try {
+                gestorTareas.eliminarTarea(tarea.getId());
+                showAlert("Éxito", "Tarea eliminada correctamente.", Alert.AlertType.INFORMATION);
+                stage.close();
+            } catch (Exception e) {
+                showAlert("Error", "No se pudo eliminar la tarea: " + e.getMessage(), Alert.AlertType.ERROR);
+            }
         }
     }
     
