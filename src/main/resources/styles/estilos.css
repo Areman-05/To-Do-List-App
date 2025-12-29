@@ -50,3 +50,28 @@
     -fx-border-radius: 5px;
 }
 
+.list-view .list-cell {
+    -fx-padding: 8px;
+}
+
+.list-view .list-cell:odd {
+    -fx-background-color: #f8f9fa;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+}
+
+.combo-box .list-view .list-cell:hover {
+    -fx-background-color: #e9ecef;
+}
+
+.dialog-pane {
+    -fx-background-color: white;
+}
+
+.alert {
+    -fx-background-color: white;
+}
+
