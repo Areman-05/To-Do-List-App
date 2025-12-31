@@ -29,6 +29,9 @@ public class LoginView {
         Label titleLabel = new Label("To-Do List App");
         titleLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
         
+        Label subtitleLabel = new Label("Gestión de tareas personal");
+        subtitleLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #6c757d;");
+        
         Label idLabel = new Label("ID de Empleado:");
         idField = new TextField();
         idField.setPromptText("Ingrese su ID");
@@ -45,7 +48,7 @@ public class LoginView {
         
         idField.setOnAction(e -> loginButton.fire());
         
-        root.getChildren().addAll(titleLabel, idLabel, idField, loginButton, registerButton);
+        root.getChildren().addAll(titleLabel, subtitleLabel, idLabel, idField, loginButton, registerButton);
         
         Scene scene = new Scene(root, 400, 300);
         scene.getStylesheets().add(getClass().getResource("/styles/estilos.css").toExternalForm());
