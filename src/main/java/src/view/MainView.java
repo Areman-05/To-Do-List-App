@@ -11,6 +11,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import src.controller.Empleado;
 import src.controller.GestorTareas;
@@ -101,6 +104,15 @@ public class MainView {
         
         Scene scene = new Scene(root, 900, 600);
         scene.getStylesheets().add(getClass().getResource("/styles/estilos.css").toExternalForm());
+        
+        javafx.scene.input.KeyCombination.Modifier ctrl = KeyCombination.CONTROL_DOWN;
+        scene.getAccelerators().put(new KeyCodeCombination(KeyCode.N, ctrl), agregarButton::fire);
+        scene.getAccelerators().put(new KeyCodeCombination(KeyCode.E, ctrl), editarButton::fire);
+        scene.getAccelerators().put(new KeyCodeCombination(KeyCode.D, ctrl), eliminarButton::fire);
+        scene.getAccelerators().put(new KeyCodeCombination(KeyCode.L, ctrl), listarButton::fire);
+        scene.getAccelerators().put(new KeyCodeCombination(KeyCode.F, ctrl), buscarButton::fire);
+        scene.getAccelerators().put(new KeyCodeCombination(KeyCode.R, ctrl), actualizarButton::fire);
+        
         stage.setScene(scene);
         stage.setTitle("Gestor de Tareas - To-Do List App");
     }
