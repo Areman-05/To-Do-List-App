@@ -129,6 +129,8 @@ public class MainView {
         
         stage.setScene(scene);
         stage.setTitle("Gestor de Tareas - To-Do List App");
+        stage.setMinWidth(800);
+        stage.setMinHeight(500);
     }
     
     public void setWelcomeMessage(String message) {
