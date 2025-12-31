@@ -47,14 +47,26 @@ public class EditarTareaDialog {
         tareaCombo.setPrefWidth(400);
         tareaCombo.setOnAction(e -> cargarDatosTarea());
         
-        Label tituloLabel = new Label("Título:");
+        Label tituloLabel = new Label("Título: (máx. 100 caracteres)");
         tituloField = new TextField();
         tituloField.setPrefWidth(400);
+        tituloField.setTextFormatter(new javafx.scene.control.TextFormatter<String>(change -> {
+            if (change.getControlNewText().length() <= 100) {
+                return change;
+            }
+            return null;
+        }));
         
-        Label descripcionLabel = new Label("Descripción:");
+        Label descripcionLabel = new Label("Descripción: (máx. 500 caracteres)");
         descripcionArea = new TextArea();
         descripcionArea.setPrefWidth(400);
         descripcionArea.setPrefRowCount(5);
+        descripcionArea.setTextFormatter(new javafx.scene.control.TextFormatter<String>(change -> {
+            if (change.getControlNewText().length() <= 500) {
+                return change;
+            }
+            return null;
+        }));
         
         guardarButton = new Button("Guardar");
         guardarButton.setPrefWidth(150);
@@ -100,6 +112,13 @@ public class EditarTareaDialog {
         
         if (nuevoTitulo.isEmpty()) {
             showAlert("Error", "El título no puede estar vacío.", Alert.AlertType.ERROR);
+            tituloField.requestFocus();
+            return;
+        }
+        
+        if (nuevoTitulo.length() > 100) {
+            showAlert("Error", "El título no puede exceder 100 caracteres.", Alert.AlertType.ERROR);
+            tituloField.selectAll();
             tituloField.requestFocus();
             return;
         }

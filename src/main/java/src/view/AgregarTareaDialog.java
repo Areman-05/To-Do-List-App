@@ -38,16 +38,28 @@ public class AgregarTareaDialog {
         Label titleLabel = new Label("Agregar Nueva Tarea");
         titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
         
-        Label tituloLabel = new Label("Título:");
+        Label tituloLabel = new Label("Título: (máx. 100 caracteres)");
         tituloField = new TextField();
         tituloField.setPromptText("Ingrese el título de la tarea");
         tituloField.setPrefWidth(400);
+        tituloField.setTextFormatter(new javafx.scene.control.TextFormatter<String>(change -> {
+            if (change.getControlNewText().length() <= 100) {
+                return change;
+            }
+            return null;
+        }));
         
-        Label descripcionLabel = new Label("Descripción:");
+        Label descripcionLabel = new Label("Descripción: (máx. 500 caracteres)");
         descripcionArea = new TextArea();
         descripcionArea.setPromptText("Ingrese la descripción (opcional)");
         descripcionArea.setPrefWidth(400);
         descripcionArea.setPrefRowCount(5);
+        descripcionArea.setTextFormatter(new javafx.scene.control.TextFormatter<String>(change -> {
+            if (change.getControlNewText().length() <= 500) {
+                return change;
+            }
+            return null;
+        }));
         
         agregarButton = new Button("Agregar");
         agregarButton.setPrefWidth(150);
@@ -75,6 +87,14 @@ public class AgregarTareaDialog {
         
         if (titulo.isEmpty()) {
             showAlert("Error", "El título no puede estar vacío.", Alert.AlertType.ERROR);
+            tituloField.requestFocus();
+            return;
+        }
+        
+        if (titulo.length() > 100) {
+            showAlert("Error", "El título no puede exceder 100 caracteres.", Alert.AlertType.ERROR);
+            tituloField.selectAll();
+            tituloField.requestFocus();
             return;
         }
         
