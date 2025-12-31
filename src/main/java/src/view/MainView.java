@@ -29,6 +29,7 @@ public class MainView {
     private Button buscarButton;
     private Button marcarEstadoButton;
     private Button actualizarButton;
+    private ComboBox<String> ordenarCombo;
     private VBox centerContent;
     private Label estadisticasLabel;
     
@@ -91,13 +92,26 @@ public class MainView {
         
         buttonBar.getChildren().addAll(agregarButton, editarButton, eliminarButton, listarButton, buscarButton, marcarEstadoButton, actualizarButton);
         
+        HBox ordenarBox = new HBox(10);
+        ordenarBox.setPadding(new Insets(10));
+        ordenarBox.setAlignment(Pos.CENTER_LEFT);
+        Label ordenarLabel = new Label("Ordenar por:");
+        ordenarCombo = new ComboBox<>();
+        ordenarCombo.getItems().addAll("ID (ascendente)", "ID (descendente)", "Título (A-Z)", "Título (Z-A)", "Estado");
+        ordenarCombo.setValue("ID (ascendente)");
+        ordenarCombo.setPrefWidth(150);
+        ordenarBox.getChildren().addAll(ordenarLabel, ordenarCombo);
+        
         centerContent = new VBox(10);
         centerContent.setPadding(new Insets(20));
         centerContent.setAlignment(Pos.TOP_CENTER);
         
+        VBox centerPanel = new VBox(5);
+        centerPanel.getChildren().addAll(ordenarBox, centerContent);
+        
         BorderPane contentPane = new BorderPane();
         contentPane.setTop(buttonBar);
-        contentPane.setCenter(centerContent);
+        contentPane.setCenter(centerPanel);
         
         root.setTop(topBar);
         root.setCenter(contentPane);
@@ -153,6 +167,10 @@ public class MainView {
         return actualizarButton;
     }
     
+    public ComboBox<String> getOrdenarCombo() {
+        return ordenarCombo;
+    }
+    
     public VBox getCenterContent() {
         return centerContent;
     }
@@ -170,13 +188,35 @@ public class MainView {
         tituloLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
         centerContent.getChildren().add(tituloLabel);
         
+        java.util.List<Tarea> tareasOrdenadas = new java.util.ArrayList<>(tareas);
+        String ordenSeleccionado = ordenarCombo.getValue();
+        if (ordenSeleccionado != null) {
+            switch (ordenSeleccionado) {
+                case "ID (ascendente)":
+                    tareasOrdenadas.sort((a, b) -> Integer.compare(a.getId(), b.getId()));
+                    break;
+                case "ID (descendente)":
+                    tareasOrdenadas.sort((a, b) -> Integer.compare(b.getId(), a.getId()));
+                    break;
+                case "Título (A-Z)":
+                    tareasOrdenadas.sort((a, b) -> a.getTitulo().compareToIgnoreCase(b.getTitulo()));
+                    break;
+                case "Título (Z-A)":
+                    tareasOrdenadas.sort((a, b) -> b.getTitulo().compareToIgnoreCase(a.getTitulo()));
+                    break;
+                case "Estado":
+                    tareasOrdenadas.sort((a, b) -> Boolean.compare(a.isCompletada(), b.isCompletada()));
+                    break;
+            }
+        }
+        
         ListView<String> lista = new ListView<>();
         ObservableList<String> items = FXCollections.observableArrayList();
         
-        if (tareas.isEmpty()) {
+        if (tareasOrdenadas.isEmpty()) {
             items.add("No hay tareas disponibles. Use 'Agregar Tarea' para crear una.");
         } else {
-            for (Tarea tarea : tareas) {
+            for (Tarea tarea : tareasOrdenadas) {
                 String estado = tarea.isCompletada() ? "✓ Completada" : "○ Pendiente";
                 String texto = String.format("ID: %d | %s | %s", tarea.getId(), estado, tarea.getTitulo());
                 if (!tarea.getDescripcion().isEmpty()) {
