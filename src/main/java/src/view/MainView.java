@@ -214,7 +214,9 @@ public class MainView {
         ObservableList<String> items = FXCollections.observableArrayList();
         
         if (tareasOrdenadas.isEmpty()) {
-            items.add("No hay tareas disponibles. Use 'Agregar Tarea' para crear una.");
+            items.add("📝 No hay tareas disponibles");
+            items.add("");
+            items.add("Use el botón '➕ Agregar Tarea' o presione Ctrl+N para crear una nueva tarea.");
         } else {
             for (Tarea tarea : tareasOrdenadas) {
                 String estado = tarea.isCompletada() ? "✓ Completada" : "○ Pendiente";
