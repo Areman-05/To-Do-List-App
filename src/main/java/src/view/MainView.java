@@ -54,40 +54,40 @@ public class MainView {
         buttonBar.setPadding(new Insets(15));
         buttonBar.setAlignment(Pos.CENTER);
         
-        agregarButton = new Button("Agregar Tarea");
+        agregarButton = new Button("➕ Agregar Tarea");
         agregarButton.setPrefWidth(150);
         agregarButton.setPrefHeight(35);
-        agregarButton.setTooltip(new javafx.scene.control.Tooltip("Crear una nueva tarea"));
+        agregarButton.setTooltip(new javafx.scene.control.Tooltip("Crear una nueva tarea (Ctrl+N)"));
         
-        editarButton = new Button("Editar Tarea");
+        editarButton = new Button("✏️ Editar Tarea");
         editarButton.setPrefWidth(150);
         editarButton.setPrefHeight(35);
-        editarButton.setTooltip(new javafx.scene.control.Tooltip("Modificar una tarea existente"));
+        editarButton.setTooltip(new javafx.scene.control.Tooltip("Modificar una tarea existente (Ctrl+E)"));
         
-        eliminarButton = new Button("Eliminar Tarea");
+        eliminarButton = new Button("🗑️ Eliminar Tarea");
         eliminarButton.setPrefWidth(150);
         eliminarButton.setPrefHeight(35);
-        eliminarButton.setTooltip(new javafx.scene.control.Tooltip("Eliminar una tarea permanentemente"));
+        eliminarButton.setTooltip(new javafx.scene.control.Tooltip("Eliminar una tarea permanentemente (Ctrl+D)"));
         
-        listarButton = new Button("Listar Tareas");
+        listarButton = new Button("📋 Listar Tareas");
         listarButton.setPrefWidth(150);
         listarButton.setPrefHeight(35);
-        listarButton.setTooltip(new javafx.scene.control.Tooltip("Ver todas las tareas en una ventana separada"));
+        listarButton.setTooltip(new javafx.scene.control.Tooltip("Ver todas las tareas en una ventana separada (Ctrl+L)"));
         
-        buscarButton = new Button("Buscar Tareas");
+        buscarButton = new Button("🔍 Buscar Tareas");
         buscarButton.setPrefWidth(150);
         buscarButton.setPrefHeight(35);
-        buscarButton.setTooltip(new javafx.scene.control.Tooltip("Buscar tareas por palabra clave"));
+        buscarButton.setTooltip(new javafx.scene.control.Tooltip("Buscar tareas por palabra clave (Ctrl+F)"));
         
-        marcarEstadoButton = new Button("Cambiar Estado");
+        marcarEstadoButton = new Button("✓ Cambiar Estado");
         marcarEstadoButton.setPrefWidth(150);
         marcarEstadoButton.setPrefHeight(35);
         marcarEstadoButton.setTooltip(new javafx.scene.control.Tooltip("Marcar tareas como completadas o pendientes"));
         
-        actualizarButton = new Button("Actualizar");
+        actualizarButton = new Button("🔄 Actualizar");
         actualizarButton.setPrefWidth(120);
         actualizarButton.setPrefHeight(35);
-        actualizarButton.setTooltip(new javafx.scene.control.Tooltip("Refrescar la lista de tareas"));
+        actualizarButton.setTooltip(new javafx.scene.control.Tooltip("Refrescar la lista de tareas (Ctrl+R)"));
         actualizarButton.setStyle("-fx-background-color: #28a745; -fx-text-fill: white;");
         
         buttonBar.getChildren().addAll(agregarButton, editarButton, eliminarButton, listarButton, buscarButton, marcarEstadoButton, actualizarButton);
