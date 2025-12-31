@@ -77,9 +77,19 @@
 
 .dialog-pane {
     -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-border-color: #dee2e6;
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);
 }
 
 .alert {
     -fx-background-color: white;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #f8f9fa;
+    -fx-border-color: #dee2e6;
+    -fx-border-width: 0 0 1 0;
 }
 
