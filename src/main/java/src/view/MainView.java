@@ -177,10 +177,13 @@ public class MainView {
             items.add("No hay tareas disponibles. Use 'Agregar Tarea' para crear una.");
         } else {
             for (Tarea tarea : tareas) {
-                String estado = tarea.isCompletada() ? "✔ Completada" : "✘ Pendiente";
+                String estado = tarea.isCompletada() ? "✓ Completada" : "○ Pendiente";
                 String texto = String.format("ID: %d | %s | %s", tarea.getId(), estado, tarea.getTitulo());
                 if (!tarea.getDescripcion().isEmpty()) {
-                    texto += " | " + tarea.getDescripcion();
+                    String descCorta = tarea.getDescripcion().length() > 50 
+                        ? tarea.getDescripcion().substring(0, 50) + "..." 
+                        : tarea.getDescripcion();
+                    texto += " | " + descCorta;
                 }
                 items.add(texto);
             }

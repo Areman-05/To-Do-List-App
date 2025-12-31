@@ -63,6 +63,14 @@
     -fx-text-fill: white;
 }
 
+.list-view .list-cell:contains("✓ Completada") {
+    -fx-text-fill: #28a745;
+}
+
+.list-view .list-cell:selected:contains("✓ Completada") {
+    -fx-text-fill: white;
+}
+
 .combo-box .list-view .list-cell:hover {
     -fx-background-color: #e9ecef;
 }
