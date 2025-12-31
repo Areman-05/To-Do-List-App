@@ -18,6 +18,7 @@ public class AgregarTareaDialog {
     private Stage stage;
     private TextField tituloField;
     private TextArea descripcionArea;
+    private Label contadorDescripcion;
     private Button agregarButton;
     private Button cancelarButton;
     private GestorTareas gestorTareas;
@@ -61,6 +62,12 @@ public class AgregarTareaDialog {
             return null;
         }));
         
+        contadorDescripcion = new Label("0/500 caracteres");
+        contadorDescripcion.setStyle("-fx-font-size: 11px; -fx-text-fill: #6c757d;");
+        descripcionArea.textProperty().addListener((obs, oldText, newText) -> {
+            contadorDescripcion.setText(newText.length() + "/500 caracteres");
+        });
+        
         agregarButton = new Button("Agregar");
         agregarButton.setPrefWidth(150);
         agregarButton.setDefaultButton(true);
@@ -68,7 +75,7 @@ public class AgregarTareaDialog {
         cancelarButton = new Button("Cancelar");
         cancelarButton.setPrefWidth(150);
         
-        root.getChildren().addAll(titleLabel, tituloLabel, tituloField, descripcionLabel, descripcionArea, agregarButton, cancelarButton);
+        root.getChildren().addAll(titleLabel, tituloLabel, tituloField, descripcionLabel, descripcionArea, contadorDescripcion, agregarButton, cancelarButton);
         
         agregarButton.setOnAction(e -> handleAgregar());
         cancelarButton.setOnAction(e -> stage.close());
