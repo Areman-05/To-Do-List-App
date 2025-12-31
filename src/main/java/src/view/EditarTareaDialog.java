@@ -123,12 +123,20 @@ public class EditarTareaDialog {
             return;
         }
         
-        try {
-            gestorTareas.editarTarea(tarea.getId(), nuevoTitulo, nuevaDescripcion);
-            showAlert("Éxito", "Tarea editada correctamente.", Alert.AlertType.INFORMATION);
-            stage.close();
-        } catch (Exception e) {
-            showAlert("Error", "No se pudo editar la tarea: " + e.getMessage(), Alert.AlertType.ERROR);
+        if (!nuevoTitulo.equals(tarea.getTitulo()) || !nuevaDescripcion.equals(tarea.getDescripcion())) {
+            try {
+                gestorTareas.editarTarea(tarea.getId(), nuevoTitulo, nuevaDescripcion);
+                showAlert("Tarea editada", 
+                    "La tarea \"" + nuevoTitulo + "\" ha sido actualizada correctamente.", 
+                    Alert.AlertType.INFORMATION);
+                stage.close();
+            } catch (Exception e) {
+                showAlert("Error al editar", 
+                    "No se pudo editar la tarea: " + e.getMessage() + "\n\nPor favor, intente nuevamente.", 
+                    Alert.AlertType.ERROR);
+            }
+        } else {
+            showAlert("Sin cambios", "No se realizaron cambios en la tarea.", Alert.AlertType.INFORMATION);
         }
     }
     
