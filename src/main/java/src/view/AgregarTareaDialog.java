@@ -99,7 +99,9 @@ public class AgregarTareaDialog {
         }
         
         if (gestorTareas.existeTitulo(titulo)) {
-            showAlert("Error", "Ya existe una tarea con ese título.", Alert.AlertType.ERROR);
+            showAlert("Error de duplicado", 
+                "Ya existe una tarea con el título: \"" + titulo + "\"\n\nPor favor, use un título diferente.", 
+                Alert.AlertType.ERROR);
             tituloField.selectAll();
             tituloField.requestFocus();
             return;
@@ -109,7 +111,9 @@ public class AgregarTareaDialog {
             int nuevoId = gestorTareas.generarNuevoId();
             Tarea nuevaTarea = new Tarea(nuevoId, titulo, descripcion);
             gestorTareas.agregarTarea(nuevaTarea);
-            showAlert("Éxito", "Tarea agregada con ID " + nuevoId + ".", Alert.AlertType.INFORMATION);
+            showAlert("Tarea agregada", 
+                "La tarea \"" + titulo + "\" ha sido agregada exitosamente.\nID asignado: " + nuevoId, 
+                Alert.AlertType.INFORMATION);
             stage.close();
         } catch (Exception e) {
             showAlert("Error", "No se pudo agregar la tarea: " + e.getMessage(), Alert.AlertType.ERROR);
