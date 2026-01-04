@@ -72,7 +72,15 @@ public class BuscarTareaDialog {
     private void realizarBusqueda() {
         String palabraClave = buscarField.getText().trim();
         if (palabraClave.isEmpty()) {
-            showAlert("Error", "Por favor ingrese una palabra clave.", Alert.AlertType.ERROR);
+            showAlert("Error", "Por favor ingrese una palabra clave para buscar.", Alert.AlertType.ERROR);
+            buscarField.requestFocus();
+            return;
+        }
+        
+        if (palabraClave.length() < 2) {
+            showAlert("Advertencia", "Por favor ingrese al menos 2 caracteres para buscar.", Alert.AlertType.WARNING);
+            buscarField.selectAll();
+            buscarField.requestFocus();
             return;
         }
         
@@ -90,7 +98,11 @@ public class BuscarTareaDialog {
         }
         
         if (resultados.isEmpty()) {
-            resultados.add("No se encontraron tareas con esa palabra clave.");
+            resultados.add("🔍 No se encontraron tareas con la palabra clave: \"" + palabraClave + "\"");
+            resultados.add("");
+            resultados.add("Intente con otra palabra clave o verifique la ortografía.");
+        } else {
+            resultados.add(0, "📋 Resultados encontrados: " + resultados.size());
         }
         
         resultadosList.setItems(resultados);
