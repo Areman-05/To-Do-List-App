@@ -138,7 +138,7 @@ public class MainView {
     }
     
     public void actualizarEstadisticas(int total, int completadas, int pendientes) {
-        estadisticasLabel.setText(String.format("| Total: %d | Completadas: %d | Pendientes: %d", total, completadas, pendientes));
+        estadisticasLabel.setText(String.format("📊 Estadísticas: Total: %d | ✅ Completadas: %d | ⏳ Pendientes: %d", total, completadas, pendientes));
     }
     
     public Button getAgregarButton() {
