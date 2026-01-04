@@ -77,16 +77,26 @@ public class MarcarCompletadaDialog {
         Tarea tarea = tareaCombo.getValue();
         if (tarea == null) {
             showAlert("Error", "Por favor seleccione una tarea.", Alert.AlertType.ERROR);
+            tareaCombo.requestFocus();
+            return;
+        }
+        
+        if (tarea.isCompletada() == completada) {
+            String estadoActual = completada ? "completada" : "pendiente";
+            showAlert("Información", 
+                "La tarea \"" + tarea.getTitulo() + "\" ya está marcada como " + estadoActual + ".", 
+                Alert.AlertType.INFORMATION);
             return;
         }
         
         if (gestorTareas.editarEstadoPorId(tarea.getId(), completada)) {
-            String mensaje = completada ? "Tarea marcada como completada." : "Tarea marcada como pendiente.";
-            showAlert("Éxito", mensaje, Alert.AlertType.INFORMATION);
+            String nuevoEstado = completada ? "completada ✓" : "pendiente ⏳";
+            String mensaje = String.format("La tarea \"%s\" ha sido marcada como %s.", tarea.getTitulo(), nuevoEstado);
+            showAlert("Estado actualizado", mensaje, Alert.AlertType.INFORMATION);
             cargarTareas();
             stage.close();
         } else {
-            showAlert("Información", "El estado de la tarea ya es el solicitado.", Alert.AlertType.INFORMATION);
+            showAlert("Error", "No se pudo actualizar el estado de la tarea.", Alert.AlertType.ERROR);
         }
     }
     
