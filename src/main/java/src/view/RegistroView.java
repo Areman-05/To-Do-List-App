@@ -33,14 +33,16 @@ public class RegistroView {
         
         Label idLabel = new Label("ID de Empleado:");
         idField = new TextField();
-        idField.setPromptText("Ingrese un nuevo ID");
+        idField.setPromptText("Ingrese un nuevo ID (número positivo)");
         idField.setPrefWidth(250);
+        idField.setTooltip(new javafx.scene.control.Tooltip("Ingrese un número positivo único. Este será su identificador de empleado."));
         
         Label rolLabel = new Label("Rol:");
         rolCombo = new ComboBox<>();
         rolCombo.getItems().addAll("empleado", "admin");
         rolCombo.setValue("empleado");
         rolCombo.setPrefWidth(250);
+        rolCombo.setTooltip(new javafx.scene.control.Tooltip("Seleccione su rol: empleado (acceso estándar) o admin (acceso administrativo)"));
         
         registrarButton = new Button("Registrarse");
         registrarButton.setPrefWidth(250);
