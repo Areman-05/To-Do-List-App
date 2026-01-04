@@ -99,7 +99,8 @@ public class MainView {
         ordenarCombo = new ComboBox<>();
         ordenarCombo.getItems().addAll("ID (ascendente)", "ID (descendente)", "Título (A-Z)", "Título (Z-A)", "Estado");
         ordenarCombo.setValue("ID (ascendente)");
-        ordenarCombo.setPrefWidth(150);
+        ordenarCombo.setPrefWidth(180);
+        ordenarCombo.setTooltip(new javafx.scene.control.Tooltip("Seleccione cómo desea ordenar la lista de tareas"));
         ordenarBox.getChildren().addAll(ordenarLabel, ordenarCombo);
         
         centerContent = new VBox(10);
@@ -186,9 +187,15 @@ public class MainView {
         
         actualizarEstadisticas(total, (int)completadas, (int)pendientes);
         
-        Label tituloLabel = new Label("Mis Tareas");
-        tituloLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+        Label tituloLabel = new Label("📋 Mis Tareas");
+        tituloLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #212529;");
         centerContent.getChildren().add(tituloLabel);
+        
+        Label instruccionLabel = new Label("Seleccione una opción del menú superior para gestionar sus tareas");
+        instruccionLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #6c757d;");
+        instruccionLabel.setWrapText(true);
+        instruccionLabel.setMaxWidth(800);
+        centerContent.getChildren().add(instruccionLabel);
         
         java.util.List<Tarea> tareasOrdenadas = new java.util.ArrayList<>(tareas);
         String ordenSeleccionado = ordenarCombo.getValue();
