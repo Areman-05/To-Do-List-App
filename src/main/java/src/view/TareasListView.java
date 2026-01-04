@@ -29,14 +29,20 @@ public class TareasListView {
     private void createView() {
         BorderPane root = new BorderPane();
         
-        Label titleLabel = new Label("Lista de Tareas");
-        titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
-        BorderPane.setMargin(titleLabel, new Insets(15));
+        VBox headerBox = new VBox(5);
+        Label titleLabel = new Label("📋 Lista de Tareas");
+        titleLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        
+        Label subtitleLabel = new Label("Vista completa de todas las tareas registradas");
+        subtitleLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #6c757d;");
+        
+        headerBox.getChildren().addAll(titleLabel, subtitleLabel);
+        headerBox.setPadding(new Insets(15));
         
         tareasList = new ListView<>();
         tareasList.setPrefHeight(400);
         
-        root.setTop(titleLabel);
+        root.setTop(headerBox);
         root.setCenter(tareasList);
         
         Scene scene = new Scene(root, 600, 500);
@@ -50,12 +56,22 @@ public class TareasListView {
         ObservableList<String> items = FXCollections.observableArrayList();
         
         if (tareas.isEmpty()) {
-            items.add("No hay tareas disponibles.");
+            items.add("📝 No hay tareas disponibles");
+            items.add("");
+            items.add("Use el botón 'Agregar Tarea' en la ventana principal para crear una nueva tarea.");
         } else {
+            items.add("📋 Total de tareas: " + tareas.size());
+            items.add("");
             for (Tarea tarea : tareas) {
-                String estado = tarea.isCompletada() ? "✔" : "✘";
-                String texto = String.format("ID: %d | %s | Título: %s | Descripción: %s", 
-                    tarea.getId(), estado, tarea.getTitulo(), tarea.getDescripcion());
+                String estado = tarea.isCompletada() ? "✓ Completada" : "○ Pendiente";
+                String texto = String.format("ID: %d | %s | %s", 
+                    tarea.getId(), estado, tarea.getTitulo());
+                if (!tarea.getDescripcion().isEmpty()) {
+                    String descCorta = tarea.getDescripcion().length() > 60 
+                        ? tarea.getDescripcion().substring(0, 60) + "..." 
+                        : tarea.getDescripcion();
+                    texto += "\n   Descripción: " + descCorta;
+                }
                 items.add(texto);
             }
         }
